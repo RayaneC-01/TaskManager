@@ -1,0 +1,83 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 0 0 inset red;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: rgb(222, 222, 222);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.title_center {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+h1,
+h2 {
+  color: #333;
+}
+
+input[type="text"] {
+  width: calc(100% - 10px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+.navbar {
+  background-color: rgb(222, 222, 222) !important;
+}
+
+.img_nav {
+  max-width: 60px; /* Réduire la largeur maximale de l'image à 50 pixels */
+  height: auto; /* Garder les proportions de l'image */
+}
+
+.added-task {
+  font: bold 20px "Times New Roman", Times, serif;
+  list-style-type: disc;
+  margin: 0 15px;
+}
+
+.task-item {
+  border-bottom: 1px solid #ccc; /* Ajoute une bordure inférieure grise à chaque élément */
+  padding-bottom: 5px; /* Ajoute un espacement en dessous de chaque élément */
+  margin-bottom: 5px; /* Ajoute un espacement entre chaque élément */
+}
