@@ -21,10 +21,10 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#">DashBoard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Disabled</a>
@@ -57,14 +57,23 @@
 
                 // Parcourir les résultats et afficher chaque tâche
                 while ($row = $stmt->fetch()) {
-                    echo "<li class='task-item added-task d-flex justify-content-between align-items-center'>
-                            <span>{$row['title']}</span>
-                            <form action='suppression.php' method='post'>
-                                <input type='hidden' name='id' value='{$row['id']}'>
-                                <button type='submit' class='btn btn-outline-danger btn-sm'>Supprimer</button>
-                            </form>
-                        </li>";
+                    echo "<li class='task-item added-task d-flex justify-content-between align-items-center'>";
+                    echo "<span>{$row['title']}</span>";
+
+                    // Vérifier si due_date est NULL
+                    if ($row['due_date'] === null) {
+                        echo "<span>Aucune date d'échéance définie</span>";
+                    } else {
+                        echo "<span>Date d'échéance : {$row['due_date']}</span>";
+                    }
+
+                    echo "<form action='suppression.php' method='post'>";
+                    echo "<input type='hidden' name='id' value='{$row['id']}'>";
+                    echo "<button type='submit' class='btn btn-outline-danger btn-sm'>Supprimer</button>";
+                    echo "</form>";
+                    echo "</li>";
                 }
+
 
 
 
@@ -75,16 +84,27 @@
             ?>
         </ul>
         <h2>Ajouter une tâche</h2>
-        <form action=" ajout.php" method="post">
+        <form action="ajout.php" method="post" id="task_form">
             <input type="text" name="title" placeholder="Titre de la tâche" required>
+            <select name="due_date" id="due_date_select">
+                <option value="today">Aujourd'hui</option>
+                <option value="tomorrow">Demain</option>
+                <option value="next_week">La semaine prochaine</option>
+                <option value="choose_date">Choisir une date</option>
+            </select>
+            <input type="text" id="custom_due_date" name="custom_due_date" placeholder="D-M-Y" style="display: none;"
+                required>
             <button type="submit">Ajouter</button>
         </form>
+
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-< script src = "/Script/script.js" >
 </script>
+
+<script src="/script/script.js">
 </script>
+
 
 </html>
