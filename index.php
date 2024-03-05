@@ -67,12 +67,23 @@
                         echo "<span>Date d'échéance : {$row['due_date']}</span>";
                     }
 
+                    // Déterminer la classe CSS en fonction de l'état de la tâche (terminée ou non)
+                    $taskClass = ($row['completed'] == 1) ? 'completed-task' : '';
+
                     echo "<form action='suppression.php' method='post'>";
                     echo "<input type='hidden' name='id' value='{$row['id']}'>";
                     echo "<button type='submit' class='btn btn-outline-danger btn-sm'>Supprimer</button>";
                     echo "</form>";
+
+                    // Ajouter le bouton "Terminé"
+                    echo "<form action='task_done.php' method='post'>";
+                    echo "<input type='hidden' name='id' value='{$row['id']}'>";
+                    echo "<button type='submit' class='btn btn-outline-success btn-sm'>Terminé</button>";
+                    echo "</form>";
+
                     echo "</li>";
                 }
+
 
 
 
@@ -83,25 +94,28 @@
             }
             ?>
         </ul>
-        <h2>Ajouter une tâche</h2>
+        <h4>Ajouter une tâche</h4>
         <form action="ajout.php" method="post" id="task_form">
             <input type="text" name="title" placeholder="Titre de la tâche" required>
-            <select name="due_date" id="due_date_select">
-                <option value="today">Aujourd'hui</option>
-                <option value="tomorrow">Demain</option>
-                <option value="next_week">La semaine prochaine</option>
-                <option value="choose_date">Choisir une date</option>
-            </select>
-            <input type="text" id="custom_due_date" name="custom_due_date" placeholder="D-M-Y" style="display: none;"
-                required>
+            <div class="date-wrapper">
+                <select name="due_date" id="due_date_select">
+                    <option value="today">Aujourd'hui</option>
+                    <option value="tomorrow">Demain</option>
+                    <option value="next_week">La semaine prochaine</option>
+                    <option value="choose_date">Choisir une date</option>
+                </select>
+                <input type="text" id="custom_due_date" name="custom_due_date" placeholder="D-M-Y"
+                    style="display: none;">
+            </div>
             <button type="submit">Ajouter</button>
+
         </form>
 
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-</script>
+    </script>
 
 <script src="/script/script.js">
 </script>

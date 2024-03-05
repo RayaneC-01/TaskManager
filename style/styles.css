@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 50px auto;
   padding: 20px;
   border-radius: 5px;
@@ -72,12 +72,54 @@ li {
 
 .added-task {
   font: bold 20px "Times New Roman", Times, serif;
-  list-style-type: disc;
-  margin: 0 15px;
+  margin: 10px 0;
 }
 
+.date-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 0 0 15px 0;
+}
+
+#custom_due_date {
+  margin-left: 10px; /* Espacement entre la liste déroulante et le champ de saisie */
+}
+
+/* Affichage du champ de saisie de date lorsque la liste déroulante est sélectionnée */
+#due_date_select:focus + #custom_due_date {
+  display: block;
+}
+/* Style pour le formulaire */
+#task_form {
+  margin-top: 20px;
+}
+
+/* Style pour le conteneur de la tâche */
 .task-item {
-  border-bottom: 1px solid #ccc; /* Ajoute une bordure inférieure grise à chaque élément */
-  padding-bottom: 5px; /* Ajoute un espacement en dessous de chaque élément */
-  margin-bottom: 5px; /* Ajoute un espacement entre chaque élément */
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* Style pour la case à cocher */
+.task-item input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Style pour le bouton Ajouter */
+#task_form button[type="submit"] {
+  margin-top: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+/* Style pour le bouton Ajouter au survol */
+#task_form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+.completed-task {
+  text-decoration: line-through;
 }
