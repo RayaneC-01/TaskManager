@@ -1,5 +1,5 @@
 <?php
-require 'connexion.php';
+require 'connexion_database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
     $titre = $_POST['title'];
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
         if (empty($due_date)) {
             // Afficher un message d'erreur et rediriger vers la page d'accueil
             echo "Erreur : Une date d'échéance est requise.";
-            header('Refresh: 2; URL=index.php');
+            header('Refresh: 3; URL=index.php');
             exit;
         }
     }

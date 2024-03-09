@@ -1,6 +1,6 @@
 <?php
 // Inclure le fichier de connexion à la base de données
-require 'connexion.php';
+require 'connexion_database.php';
 
 // Vérifier si l'ID de la tâche a été envoyé via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
@@ -8,11 +8,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $id = $_POST['id'];
 
     try {
-        // Préparer la requête pour marquer la tâche comme terminée
-        $stmt = $conn->prepare("UPDATE tasks SET completed = 1 WHERE id = :id");
+        // Récupérer l'état actuel de la tâche
+        $stmt = $conn->prepare("SELECT completed FROM tasks WHERE id = :id");
         $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $task = $stmt->fetch();
 
-        // Exécuter la requête
+        // Basculer entre terminé et non terminé
+        $completed = $task['completed'] ? 0 : 1;
+
+        // Mettre à jour l'état de la tâche dans la base de données
+        $stmt = $conn->prepare("UPDATE tasks SET completed = :completed WHERE id = :id");
+        $stmt->bindParam(':completed', $completed);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
 
         // Rediriger l'utilisateur vers la page d'accueil

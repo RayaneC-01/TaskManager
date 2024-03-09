@@ -10,11 +10,13 @@ try {
 
     // Configurer le mode d'erreur PDO pour générer des exceptions
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $message_succes = "Connexion réussie à la BDD";
 
     // Paramétrer l'encodage des caractères
     $conn->exec("SET NAMES utf8");
 } catch (PDOException $e) {
     // En cas d'erreur de connexion, afficher un message d'erreur
-    die("Erreur de connexion à la base de données : " . $e->getMessage());
+    $message_erreur = "La connexion a échoué : " . $e->getMessage();
 }
+
 ?>

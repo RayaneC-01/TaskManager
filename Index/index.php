@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/style/styles.css">
+    <link rel="stylesheet" href="/style/Forms.css">
 </head>
 
 <body>
@@ -24,7 +25,7 @@
                         <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">DashBoard</a>
+                        <a class="nav-link" href="dashboard.php">DashBoard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Disabled</a>
@@ -37,8 +38,10 @@
                     </button>
                 </form>
                 <div class="buttons">
-                    <button type="button" class="btn btn-warning">Se connecter</button>
-                    <button type="button" class="btn btn-info">S'inscrire</button>
+                    <button onclick="window.location.href ='./sign_in.php' " type=" button" class="btn btn-warning">Se
+                        connecter</button>
+                    <button onclick="window.location.href ='./sign_up.php' " type="button"
+                        class="btn btn-info">S'inscrire</button>
                 </div>
             </div>
         </div>
@@ -50,7 +53,7 @@
         <ul>
             <!-- Afficher les tâches depuis la base de données -->
             <?php
-            require 'connexion.php';
+            require 'connexion_database.php';
             try {
                 // Préparer la requête de sélection des tâches
                 $stmt = $conn->query("SELECT * FROM tasks");
@@ -60,11 +63,16 @@
                     echo "<li class='task-item added-task d-flex justify-content-between align-items-center'>";
                     echo "<span>{$row['title']}</span>";
 
-                    // Vérifier si due_date est NULL
-                    if ($row['due_date'] === null) {
-                        echo "<span>Aucune date d'échéance définie</span>";
+                    // Vérifier si la tâche est marquée comme terminée ou non
+                    if ($row['completed'] == 1) {
+                        echo "<span class='completed-task'>Tâche terminée</span>";
                     } else {
-                        echo "<span>Date d'échéance : {$row['due_date']}</span>";
+                        // Afficher la date d'échéance si elle est définie
+                        if ($row['due_date'] === null) {
+                            echo "<span>Aucune date d'échéance définie</span>";
+                        } else {
+                            echo "<span>Date d'échéance : {$row['due_date']}</span>";
+                        }
                     }
 
                     // Déterminer la classe CSS en fonction de l'état de la tâche (terminée ou non)
@@ -72,21 +80,19 @@
 
                     echo "<form action='suppression.php' method='post'>";
                     echo "<input type='hidden' name='id' value='{$row['id']}'>";
-                    echo "<button type='submit' class='btn btn-outline-danger btn-sm'>Supprimer</button>";
+                    echo "<button type='submit' class='btn btn-outline-danger btn-xl'>Supprimer</button>";
                     echo "</form>";
 
-                    // Ajouter le bouton "Terminé"
+                    // Bouton "Terminé"
                     echo "<form action='task_done.php' method='post'>";
                     echo "<input type='hidden' name='id' value='{$row['id']}'>";
-                    echo "<button type='submit' class='btn btn-outline-success btn-sm'>Terminé</button>";
+                    echo "<button type='submit' class='btn btn-outline-success btn-xl'>Terminé</button>";
                     echo "</form>";
+
+
 
                     echo "</li>";
                 }
-
-
-
-
 
             } catch (PDOException $e) {
                 // En cas d'erreur, afficher un message d'erreur
