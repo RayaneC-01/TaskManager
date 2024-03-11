@@ -1,3 +1,13 @@
+<?php
+//  // Vérifier si l'utilisateur est connecté avant d'afficher cette page
+// session_start();
+// if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
+//     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+//     header('Location: index.php');
+//     exit;
+// }
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 

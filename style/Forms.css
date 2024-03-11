@@ -68,7 +68,7 @@ textarea {
 }
 
 .form-03-main {
-  width: 500px;
+  width: 50%;
   display: block;
   margin: 20px auto;
   padding: 25px 50px 25px;
@@ -85,19 +85,31 @@ textarea {
 }
 
 .remember-label {
-  font-size: 17px;
-  font-weight: 600;
-  text-decoration: none;
-  outline: none;
-  color: #333;
+  display: flex; /* Utilisation de flexbox */
+  align-items: center; /* Alignement vertical au centre */
+}
+
+.checkbox.form-group {
+  display: flex; /* Utilisation de flexbox */
+  align-items: center; /* Alignement vertical au centre */
+}
+
+.remember-label input[type="checkbox"] {
+  margin-right: 10px; /* Espacement entre le label et le champ de saisie */
+  flex-shrink: 0; /* Empêche le rétrécissement du champ de saisie */
 }
 .form-group {
   padding: 10px 0px;
   display: flex;
-  width: 100%;
+  white-space: nowrap;
+  flex-direction: row;
   align-items: center;
 }
 
+label {
+  width: 40%; /* Largeur fixe pour les labels */
+  margin-right: 10px; /* Espacement entre le label et le champ de saisie */
+}
 [class="form-group inscription_1"] {
   margin: 0px;
   margin-left: 3px;
@@ -126,7 +138,8 @@ textarea {
   box-shadow: none;
   padding: 10px 15px;
   border-radius: 20px;
-  border: 2px solid#2b3990;
+  border: 2px solid #2b3990;
+  flex: 1; /* Le champ de saisie occupe tout l'espace disponible */
 }
 
 .checkbox {
@@ -224,6 +237,11 @@ textarea {
   text-align: center;
 }
 
+.forgot_password {
+  color: red;
+  text-decoration: underline;
+  font-weight: 400;
+}
 @media screen and (max-width: 600px) {
   .form-03-main {
     width: 100%;
