@@ -12,7 +12,7 @@ document.getElementById('due_date_select').addEventListener('change', function (
         // Mettre le focus sur l'input pour la date personnalisée
         customDateInput.focus();
     } else {
-        // Si une autre option est sélectionnée, cacher l'input pour la date personnalisée
+        // Si une autre option est sélectionnée, cacher l'input pour la date personnalisée/
         customDateInput.setAttribute('type', 'text');
         customDateInput.style.display = 'none';
     }
