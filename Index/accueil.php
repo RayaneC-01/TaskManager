@@ -1,13 +1,14 @@
 <?php
 // Vérifier si l'utilisateur est connecté avant d'afficher cette page
-// session_start();
-// if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
-//     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-//     header('Location: index.php');
-//     exit;
-// }
+session_start();
+if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
+    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    header('Location: connexion.php');
+    exit;
+}
 
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -32,7 +33,8 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
+                        <a class="nav-link active bouton-requiert-connexion" aria-current="page"
+                            href="index.php">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="dashboard.php">DashBoard</a>
@@ -117,7 +119,7 @@
                 <input type="text" id="custom_due_date" name="custom_due_date" placeholder="D-M-Y"
                     style="display: none;">
             </div>
-            <button type="submit">Ajouter</button>
+            <button class="bouton-requiert-connexion" type="submit">Ajouter</button>
 
         </form>
 
@@ -129,6 +131,5 @@
 
 <script src="/script/script.js">
 </script>
-
 
 </html>
