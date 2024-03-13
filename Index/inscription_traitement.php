@@ -33,17 +33,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmt->bindParam(':password', $hashed_password);
                     $stmt->bindParam(':username', $username);
                     $stmt->bindParam(':created_at', $created_at);
-
-
                     // Exécuter la requête
                     $stmt->execute();
 
-                    // Rediriger l'utilisateur vers la page d'accueil après une inscription réussie
-                    header("Location: accueil.php");
-                    exit;
+                    header("Location: accueil.php?signup=success");
+                    
                 } catch (PDOException $e) {
                     // Gérer les erreurs de base de données
-                    $_SESSION['error'] = "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.";
+                    $_SESSION['error'] = "Une erreur s'est produite loooors de l'inscription. Veuillez réessayer.";
                 }
             } else {
                 // Adresse e-mail invalide

@@ -14,8 +14,9 @@ img {
 a {
   text-decoration: none;
   outline: none;
-  color: #333;
-  font-size: 17px;
+  color: #007bff;
+  font-size: 20px;
+  font-weight: 500;
 }
 a:hover {
   color: #333;
@@ -54,13 +55,14 @@ textarea {
   position: relative;
 }
 .form-03-main {
+  display: flex;
+  flex-direction: column;
   width: 500px;
-  display: block;
   margin: 20px auto;
   padding: 25px 50px 25px;
   background: rgb(255, 255, 255, 0.6);
   border-radius: 6px;
-  z-index: 9;
+  background: rgb(255, 255, 255, 0.6);
 }
 .logo {
   display: block;
@@ -171,14 +173,11 @@ textarea {
   text-align: center;
 }
 
-.signup-link > a:hover {
-  text-decoration: underline;
-  color: #007bff;
-}
 .button-group {
   display: flex;
   justify-content: space-around;
   align-content: space-around;
+  flex-direction: column;
 }
 
 .button-group button,
@@ -189,9 +188,15 @@ textarea {
 .button-group_inscription {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+
+.button-group_inscription p {
+  margin-top: 10px;
+}
+.button-group p {
+  margin-top: 10px;
 }
 /* Style pour l'état de focus */
 input:focus {

@@ -35,11 +35,25 @@ session_start();
                             // Afficher les erreurs s'il y en a
                             if (isset($_SESSION['error'])) {
                                 echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error'] . '</div>';
-                                unset($_SESSION['error']); // Supprimer l'erreur de la session pour qu'elle ne s'affiche qu'une fois
+                                unset($_SESSION['error']);
                             }
                             ?>
                             <div class="logo">
                                 <img src="/Images/user.png" alt="User logo">
+                            </div>
+                            <div class="form-group nm_lk">
+                                <p class="h4">Connectez-vous avec :</p>
+                            </div>
+                            <div class="form-group pt-0">
+                                <div class="_social_04">
+                                    <ol>
+                                        <li><i class="fab fa-github"></i></li>
+                                        <li><i class="fab fa-twitter"></i></li>
+                                        <li><i class="fab fa-google-plus-g"></i></li>
+                                        <li><i class="fab fa-instagram"></i></li>
+                                        <li><i class="fab fa-linkedin"></i></li>
+                                    </ol>
+                                </div>
                             </div>
                             <form id="inscriptionForm" method="POST" action="inscription_traitement.php">
                                 <div class="form-group">
@@ -83,30 +97,16 @@ session_start();
                                 </div>
 
                                 <div class="button-group_inscription">
-                                    <button type="submit" class="btn btn-success btn-lg">Créer un nouveau
+                                    <button type="submit" class="btn btn-primary btn-lg">Créer un
                                         compte</button>
-                                    <br>
-                                    <button onclick="window.location.href ='./connexion.php' " type="button"
+                                    <p>Vous avez deja un compte?<a href="./connexion.php"> Se connecter</a></p>
+                                    <!-- <button onclick="window.location.href ='./connexion.php' " type="button"
                                         class="btn btn-info btn-lg">Se
-                                        connecter</button>
+                                        connecter</button> -->
 
 
                                 </div>
                             </form>
-                            <div class="form-group nm_lk">
-                                <p class="h4">Ou se connecter avec:</p>
-                            </div>
-                            <div class="form-group pt-0">
-                                <div class="_social_04">
-                                    <ol>
-                                        <li><i class="fab fa-github"></i></li>
-                                        <li><i class="fab fa-twitter"></i></li>
-                                        <li><i class="fab fa-google-plus-g"></i></li>
-                                        <li><i class="fab fa-instagram"></i></li>
-                                        <li><i class="fab fa-linkedin"></i></li>
-                                    </ol>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

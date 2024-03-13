@@ -38,35 +38,8 @@ session_start();
                             <div class="logo">
                                 <img src="/Images/user.png" alt="User logo">
                             </div>
-                            <form id="login_Form" method="POST" action="connexion_traitement.php">
-                                <!-- Assurez-vous que le formulaire pointe vers la bonne page PHP -->
-                                <div class="form-group">
-                                    <label for="identifier">nom d'utilisateur ou e-mail : </label>
-                                    <input type="text" id="identifier" name="identifier" class="form-control"
-                                        placeholder="nom d'utilisateur ou e-mail..." required />
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">mot de passe :</label>
-                                    <input type="password" id="password" name="password" class="form-control"
-                                        placeholder="Entrez votre mot de passe..." required>
-                                </div>
-                                <div class="checkbox form-group">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="remember">
-                                        <label class="form-check-label remember-label" for="remember">Se
-                                            Rappeler de moi</label>
-                                    </div>
-                                    <label for="password" class="password">Mot de passe oublié</label>
-                                </div>
-                                <div class="button-group">
-                                    <button type="submit" class="btn btn-warning btn-lg">Connexion</button>
-                                    <a href="inscription.php" class="btn btn-primary btn-lg enable" role="button">Créer
-                                        un compte</a>
-
-                                </div>
-                            </form>
                             <div class="form-group nm_lk">
-                                <p class="h4">Ou se connecter avec:</p>
+                                <p class="h4">Connectez-vous avec :</p>
                             </div>
                             <div class="form-group pt-0">
                                 <div class="_social_04">
@@ -79,6 +52,32 @@ session_start();
                                     </ol>
                                 </div>
                             </div>
+                            <form id="login_Form" method="POST" action="connexion_traitement.php">
+                                <!-- Assurez-vous que le formulaire pointe vers la bonne page PHP -->
+                                <div class="form-group">
+                                    <label for="identifier">nom d'utilisateur ou e-mail : </label>
+                                    <input type="text" id="identifier" name="identifier" class="form-control"
+                                        placeholder="nom d'utilisateur ou e-mail..." required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">mot de passe :</label>
+                                    <input type="password" id="password" name="password" class="form-control"
+                                        placeholder="Entrez votre mot de passe..." required />
+                                </div>
+                                <div class="checkbox form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="remember">
+                                        <label class="form-check-label remember-label" for="remember">Se
+                                            Rappeler de moi</label>
+                                    </div>
+                                    <label for="password" class="password">Mot de passe oublié</label>
+                                </div>
+                                <div class="button-group">
+                                    <button type="submit" class="btn btn-primary btn-lg">Connexion</button>
+                                    <p>Vous n'avez pas de compte ?<a href="inscription.php" class="button-text"> Créer
+                                            un compte</a> </p>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
