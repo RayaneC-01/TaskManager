@@ -80,7 +80,7 @@ require_once 'Index/header.php';
         <form action="modification_traitement.php" method="post">
             <input type="hidden" name="id" value="<?php echo $id_tache; ?>">
             <div class="mb-3">
-                <label for="title" class="form-label">Titree de la tâche</label>
+                <label for="title" class="form-label">Titre de la tâche</label>
                 <input type="text" class="form-control" id="title" name="title" value="<?php echo $tache['title']; ?>">
             </div>
             <div class="mb-3">
