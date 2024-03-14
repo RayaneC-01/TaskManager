@@ -19,12 +19,7 @@ session_start();
 </head>
 
 <body>
-    <?php
-    // Afficher le message d'erreur s'il existe
-    if (isset($error_message)) {
-        echo '<p style="color: red;">' . $error_message . '</p>';
-    }
-    ?>
+
     <section class="form-02-main">
         <div class="container">
             <div class="row">
@@ -33,10 +28,11 @@ session_start();
                         <div class="form-03-main">
                             <?php
                             // Afficher les erreurs s'il y en a
-                            if (isset($_SESSION['error'])) {
-                                echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error'] . '</div>';
-                                unset($_SESSION['error']);
+                            if (isset($_SESSION['message_error'])) {
+                                echo '<div class="alert alert-danger" role="alert">' . $_SESSION['message_error'] . '</div>';
+                                unset($_SESSION['message_error']);
                             }
+
                             ?>
                             <div class="logo">
                                 <img src="/Images/user.png" alt="User logo">
