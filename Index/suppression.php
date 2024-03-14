@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         // Exécuter la requête
         $stmt->execute();
 
-        // Rediriger vers la page d'accueil
+        // Rediriger vers la page d'accueil si la tache est correctement supprimée
         header('Location: accueil.php');
         exit;
     } catch (PDOException $e) {
