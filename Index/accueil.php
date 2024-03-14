@@ -7,12 +7,6 @@ if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connect
     exit;
 }
 
-?>
-
-<!DOCTYPE html>
-<html lang="fr">
-
-<?php
 $pageTitle = "Page d'accueil Gestionnaire de tâches";
 require_once 'header.php'; ?>
 
@@ -20,8 +14,8 @@ require_once 'header.php'; ?>
     <h2 class="title_center">Gestionnaire de tâches</h2>
     <h2>Liste des tâches : </h2>
     <ul>
-        <!-- Afficher les tâches depuis la base de données -->
         <?php
+        // Afficher les tâches depuis la base de données
         require 'connexion_database.php';
         try {
             // Préparer la requête de sélection des tâches
@@ -47,6 +41,7 @@ require_once 'header.php'; ?>
                 // Déterminer la classe CSS en fonction de l'état de la tâche (terminée ou non)
                 $taskClass = ($row['completed'] == 1) ? 'completed-task' : '';
 
+                // Bouton "Supprimer"
                 echo "<form action='suppression.php' method='post'>";
                 echo "<input type='hidden' name='id' value='{$row['id']}'>";
                 echo "<button type='submit' class='btn btn-outline-danger btn-xl'>Supprimer</button>";
@@ -58,8 +53,8 @@ require_once 'header.php'; ?>
                 echo "<button type='submit' class='btn btn-outline-success btn-xl'>Terminé</button>";
                 echo "</form>";
 
-
-
+                // Lien "Modifier" vers modification_tache.php avec l'ID de la tâche comme paramètre
+                echo "<a href='modification_tache.php?id={$row['id']}'>Modifier</a>";
                 echo "</li>";
             }
 
@@ -68,6 +63,7 @@ require_once 'header.php'; ?>
             echo "Erreur : " . $e->getMessage();
         }
         ?>
+
     </ul>
     <h4>Ajouter une tâche</h4>
     <form action="ajout.php" method="post" id="task_form">
@@ -82,6 +78,19 @@ require_once 'header.php'; ?>
             <input type="text" id="custom_due_date" name="custom_due_date" placeholder="D-M-Y" style="display: none;">
         </div>
         <button class="bouton-requiert-connexion" type="submit">Ajouter</button>
+        <?php
+        // Afficher un message de succès s'il existe
+        if (isset($_SESSION['message_success'])) {
+            echo "<div class='alert alert-success'>{$_SESSION['message_success']}</div>";
+            unset($_SESSION['message_success']); // Effacer le message après l'avoir affiché
+        }
+
+        // Afficher un message d'erreur s'il existe
+        if (isset($_SESSION['message_error'])) {
+            echo "<div class='alert alert-danger'>{$_SESSION['message_error']}</div>";
+            unset($_SESSION['message_error']); // Effacer le message après l'avoir affiché
+        }
+        ?>
 
     </form>
 
