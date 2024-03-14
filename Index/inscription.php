@@ -55,40 +55,40 @@ session_start();
                                 <div class="form-group">
                                     <label for="first_name">Prénom: </label>
                                     <input type="text" id="first_name" name="first_name" class="form-control"
-                                        placeholder="Entrez votre prénom..." required />
+                                        placeholder="Entrez votre prénom" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="last_name">Nom: </label>
                                     <input type="text" id="last_name" name="last_name" class="form-control"
-                                        placeholder="Entrez votre nom..." required />
+                                        placeholder="Entrez votre nom" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="username">Nom utilisateur: </label>
                                     <input type="text" id="username" name="username" class="form-control"
-                                        placeholder="Entrez votre nom d'utilisateur..." required />
+                                        placeholder="Entrez votre nom d'utilisateur" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-mail: </label>
                                     <input type="email" id="email" name="email" class="form-control"
-                                        placeholder="Entrez votre e-mail..." required />
+                                        placeholder="Entrez votre e-mail" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Mot de passe: </label>
                                     <input type="password" id="password" name="password" class="form-control"
-                                        placeholder="Entrez votre mot de passe..." required />
+                                        placeholder="mot de passe" required />
                                 </div>
 
                                 <div class="form-group">
                                     <label for="confirm_password">Confirmation de mot de passe:</label>
                                     <input type="password" id="confirm_password" name="confirm_password"
-                                        class="form-control" placeholder="Confirmez votre mot de passe..." required />
+                                        class="form-control" placeholder="Confirmez votre mot de passe" required />
                                 </div>
 
                                 <div class="checkbox form-group">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="remember">
-                                        <label class="form-check-label remember-label" for="remember">Se Rappeler de
-                                            moi</label>
+                                        <label class="form-check-label remember-label" for="remember">
+                                            Se rappeler de moi</label>
                                     </div>
                                 </div>
 
