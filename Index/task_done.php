@@ -2,7 +2,7 @@
 // Inclure le fichier de connexion à la base de données
 require 'connexion_database.php';
 
-// Vérifier si l'ID de la tâche a été envoyé via POST
+// Vérifier si l'ID de la tâche a été envoyé via POST et si elle existe
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     // Récupérer l'ID de la tâche
     $id = $_POST['id'];
