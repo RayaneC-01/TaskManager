@@ -2,7 +2,7 @@
 session_start();
 session_start();
 
-require 'connexion_database.php'; // Assurez-vous du bon chemin vers le fichier
+require_once 'connexion_database.php'; // Assurez-vous du bon chemin vers le fichier
 
 // Vérifier si le formulaire d'inscription a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
