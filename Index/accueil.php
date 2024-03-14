@@ -65,7 +65,7 @@ require_once 'header.php'; ?>
         ?>
 
     </ul>
-    <h4>Ajouter une tâche</h4>
+    <h4>Ajouter une tâche </h4>
     <form action="ajout.php" method="post" id="task_form">
         <input type="text" name="title" placeholder="Titre de la tâche" required>
         <div class="date-wrapper">
