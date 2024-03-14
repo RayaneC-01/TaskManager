@@ -77,7 +77,7 @@ require_once 'header.php'; ?>
             </select>
             <input type="text" id="custom_due_date" name="custom_due_date" placeholder="D-M-Y" style="display: none;">
         </div>
-        <button class="bouton-requiert-connexion" type="submit">Ajouter</button>
+        <button class="bouton-requiert-connexion" type="submit">Ajouter une tache</button>
         <?php
         // Afficher un message de succès s'il existe
         if (isset($_SESSION['message_success'])) {
