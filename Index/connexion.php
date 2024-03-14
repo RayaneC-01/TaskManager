@@ -74,7 +74,7 @@ session_start();
                                 </div>
                                 <div class="button-group">
                                     <button type="submit" class="btn btn-outline-primary btn-lg">Connexion</button>
-                                    <p>Vous n'avez pas de compte ?<a href="inscription.php" class="button-text"> Créer
+                                    <p>Vous n'avez pas de compte?<a href="inscription.php" class="button-text"> Créer
                                             un compte</a> </p>
                                 </div>
                             </form>
