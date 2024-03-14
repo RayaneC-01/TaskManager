@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
         $stmt->execute();
 
         // Rediriger vers la page d'accueil
-        header('Location: index.php');
+        header('Location: accueil.php');
         exit;
     } catch (PDOException $e) {
         // En cas d'erreur, afficher un message d'erreur

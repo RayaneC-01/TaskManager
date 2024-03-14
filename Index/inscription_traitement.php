@@ -1,5 +1,8 @@
 <?php
 session_start();
+session_start();
+
+require 'connexion_database.php'; // Assurez-vous du bon chemin vers le fichier
 
 // Vérifier si le formulaire d'inscription a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -17,46 +20,65 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($password === $confirm_password) {
             // Valider l'e-mail
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                // Hasher le mot de passe
-                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                // Vérifier si l'adresse e-mail est déjà utilisée
+                $stmt_check_email = $conn->prepare("SELECT COUNT(*) AS count FROM users WHERE email = :email");
+                $stmt_check_email->bindParam(':email', $email);
+                $stmt_check_email->execute();
+                $email_exists = $stmt_check_email->fetch(PDO::FETCH_ASSOC)['count'];
 
-                // Enregistrer la date et l'heure de création du compte
-                $created_at = date('Y-m-d H:i:s');
+                if ($email_exists > 0) {
+                    // L'adresse e-mail est déjà utilisée, afficher un message d'erreur
+                    $_SESSION['message_error'] = "L'adresse e-mail est déjà utilisée. Veuillez en choisir une autre.";
+                } else {
+                    // L'adresse e-mail n'est pas encore utilisée, procéder à l'inscription
+                    // Hasher le mot de passe
+                    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-                require 'connexion_database.php';
-                try {
-                    // Préparer la requête d'insertion
-                    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, created_at, username) VALUES (:first_name, :last_name, :email, :password, :created_at, :username)");
-                    $stmt->bindParam(':first_name', $first_name);
-                    $stmt->bindParam(':last_name', $last_name);
-                    $stmt->bindParam(':email', $email);
-                    $stmt->bindParam(':password', $hashed_password);
-                    $stmt->bindParam(':username', $username);
-                    $stmt->bindParam(':created_at', $created_at);
-                    // Exécuter la requête
-                    $stmt->execute();
+                    // Enregistrer la date et l'heure de création du compte
+                    $created_at = date('Y-m-d H:i:s');
 
-                    header("Location: accueil.php?signup=success");
-                    
-                } catch (PDOException $e) {
-                    // Gérer les erreurs de base de données
-                    $_SESSION['error'] = "Une erreur s'est produite loooors de l'inscription. Veuillez réessayer.";
+                    try {
+                        // Préparer la requête d'insertion
+                        $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, created_at, username) VALUES (:first_name, :last_name, :email, :password, :created_at, :username)");
+                        $stmt->bindParam(':first_name', $first_name);
+                        $stmt->bindParam(':last_name', $last_name);
+                        $stmt->bindParam(':email', $email);
+                        $stmt->bindParam(':password', $hashed_password);
+                        $stmt->bindParam(':username', $username);
+                        $stmt->bindParam(':created_at', $created_at);
+
+                        $_SESSION['first_name'] = $first_name;
+
+                        // Exécuter la requête
+                        if ($stmt->execute()) {
+
+                            // Rediriger vers la page d'accueil après une inscription réussie
+                            header("Location: accueil.php");
+                            exit;
+                        } else {
+                            $_SESSION['message_error'] = "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.";
+                        }
+                    } catch (PDOException $e) {
+                        // Gérer les erreurs de base de données
+                        $_SESSION['message_error'] = "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.";
+                    }
                 }
             } else {
                 // Adresse e-mail invalide
-                $_SESSION['error'] = "L'adresse e-mail n'est pas valide.";
+                $_SESSION['message_error'] = "L'adresse e-mail n'est pas valide.";
             }
         } else {
             // Les mots de passe ne correspondent pas
-            $_SESSION['error'] = "Le mot de passe et la confirmation du mot de passe ne correspondent pas.";
+            $_SESSION['message_error'] = "Le mot de passe et la confirmation du mot de passe ne correspondent pas.";
         }
     } else {
         // Certains champs requis ne sont pas renseignés
-        $_SESSION['error'] = "Veuillez remplir tous les champs.";
+        $_SESSION['message_error'] = "Veuillez remplir tous les champs.";
     }
 }
 
 // Rediriger vers la page d'inscription en cas d'erreur
 header("Location: inscription.php");
 exit;
+
 ?>

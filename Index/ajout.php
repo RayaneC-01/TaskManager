@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
         if (empty($due_date)) {
             // Afficher un message d'erreur et rediriger vers la page d'accueil
             echo "Erreur : Une date d'échéance est requise.";
-            header('Refresh: 3; URL=index.php');
+            header('Refresh: 3; URL=accueil.php');
             exit;
         }
     }
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
         $stmt->execute();
 
         // Rediriger vers la page d'accueil
-        header('Location: index.php');
+        header('Location: accueil.php');
         exit;
     } catch (PDOException $e) {
         // En cas d'erreur, afficher un message d'erreur
