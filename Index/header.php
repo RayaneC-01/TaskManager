@@ -36,10 +36,10 @@ function getCurrentPageName()
                             href="accueil.php">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.php">DashBoard</a>
+                        <a class="nav-link" href="dashboard.php">Tableau de Bord</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                        <a class="nav-link disabled" href="deleted_task.php" aria-disabled="true">Historique</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search" style="margin-right: 70px;">
