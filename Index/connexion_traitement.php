@@ -42,7 +42,7 @@ if (isset($_POST['identifier'], $_POST['password'])) {
 
         } else {
             // Utilisateur non trouvé
-            $_SESSION['error'] = "Nom d'utilisateur ou adresse e-mail invalide ! ";
+            $_SESSION['error'] = "Nom d'utilisateur ou adresse e-mail invalide.";
         }
         $conn = null;
     } catch (PDOException $e) {
