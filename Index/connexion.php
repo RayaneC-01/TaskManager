@@ -57,12 +57,12 @@ session_start();
                                 <div class="form-group">
                                     <label for="identifier">nom d'utilisateur ou e-mail : </label>
                                     <input type="text" id="identifier" name="identifier" class="form-control"
-                                        placeholder="nom d'utilisateur ou e-mail..." required />
+                                        placeholder="nom d'utilisateur ou e-mail" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="password">mot de passe :</label>
                                     <input type="password" id="password" name="password" class="form-control"
-                                        placeholder="Entrez votre mot de passe..." required />
+                                        placeholder="Entrez votre mot de passe" required />
                                 </div>
                                 <div class="checkbox form-group">
                                     <div class="form-check">
@@ -87,7 +87,7 @@ session_start();
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="/script/script.js"></script>
 </body>
 

@@ -37,19 +37,19 @@ if (isset($_POST['identifier'], $_POST['password'])) {
                 exit;
             } else {
                 // Mot de passe incorrect
-                $_SESSION['error'] = "Mot de passe incorrect.";
+                $_SESSION['error'] = "Mot de passe incorrect ! ";
             }
 
         } else {
             // Utilisateur non trouvé
-            $_SESSION['error'] = "Nom d'utilisateur ou adresse e-mail invalide.";
+            $_SESSION['error'] = "Nom d'utilisateur ou adresse e-mail invalide ! ";
         }
         $conn = null;
     } catch (PDOException $e) {
         // Erreur de base de données
-        $_SESSION['error'] = "Une erreur s'est produite lors de la connexion. Veuillez réessayer.";
+        $_SESSION['error'] = "Une erreur s'est produite lors de la connexion. Veuillez réessayer ! ";
         // Afficher le message d'erreur spécifique renvoyé par PDO pour le débogage
-        // $_SESSION['error'] = "Erreur de base de données : " . $e->getMessage();
+        $_SESSION['error'] = "Erreur de base de données : " . $e->getMessage();
     }
 } else {
     // Champs non renseignés
