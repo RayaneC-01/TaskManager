@@ -48,16 +48,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $stmt->bindParam(':created_at', $created_at);
 
                         $_SESSION['first_name'] = $first_name;
-
-                        // Exécuter la requête
-                        if ($stmt->execute()) {
-
-                            // Rediriger vers la page d'accueil après une inscription réussie
-                            header("Location: accueil.php");
-                            exit;
-                        } else {
-                            $_SESSION['message_error'] = "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.";
-                        }
+                        $stmt->execute();
+                        // Rediriger vers la page d'accueil après une inscription réussie
+                        header("Location: accueil.php");
+                        exit;
                     } catch (PDOException $e) {
                         // Gérer les erreurs de base de données
                         $_SESSION['message_error'] = "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.";
