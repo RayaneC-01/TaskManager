@@ -73,6 +73,7 @@ require_once 'header.php'; ?>
                 <option value="today">Aujourd'hui</option>
                 <option value="tomorrow">Demain</option>
                 <option value="next_week">La semaine prochaine</option>
+                <option value="in_2_week">Dans 2 semaines</option>
                 <option value="choose_date">Choisir une date</option>
             </select>
             <input type="text" id="custom_due_date" name="custom_due_date" placeholder="D-M-Y" style="display: none;">

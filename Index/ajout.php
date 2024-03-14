@@ -30,6 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'])) {
         case 'next_week':
             $due_date = date('Y-m-d', strtotime('+1 week'));
             break;
+        case 'in_2_week':
+            // Ajoute 3 jours à la date actuelle
+            $due_date = date('Y-m-d', strtotime('+2 week'));
+            break;
         case 'choose_date':
             // Si l'utilisateur a choisi "Choisir une date", je recupere la date à partir du champ de formulaire 
             $due_date = $_POST['custom_due_date'];
