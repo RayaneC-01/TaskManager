@@ -16,7 +16,7 @@ try {
     $conn->exec("SET NAMES utf8");
 } catch (PDOException $e) {
     // En cas d'erreur de connexion, afficher un message d'erreur
-    $message_erreur = "La connexion a échoué : " . $e->getMessage();
+    $message_erreur = "La connexion a échoué: " . $e->getMessage();
 }
 
 ?>
