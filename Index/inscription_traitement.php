@@ -1,8 +1,7 @@
 <?php
 session_start();
-session_start();
 
-require_once 'connexion_database.php'; // Assurez-vous du bon chemin vers le fichier
+require_once 'connexion_database.php';
 
 // Vérifier si le formulaire d'inscription a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -47,14 +46,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $stmt->bindParam(':username', $username);
                         $stmt->bindParam(':created_at', $created_at);
 
-                        $_SESSION['first_name'] = $first_name;
                         $stmt->execute();
+
                         // Rediriger vers la page d'accueil après une inscription réussie
                         header("Location: accueil.php");
                         exit;
+
                     } catch (PDOException $e) {
                         // Gérer les erreurs de base de données
-                        $_SESSION['message_error'] = "Une erreur s'est produite lors de l'inscription. Veuillez réessayer.";
+                        $_SESSION['message_error'] = "Une erreur s'est produite lors de l'inscription. Veuillez réessayer." . $e->getMessage();
+                        var_dump($e);
                     }
                 }
             } else {
