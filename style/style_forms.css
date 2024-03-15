@@ -80,9 +80,14 @@ textarea {
 }
 .form-group {
   padding: 10px 0;
+  font-size: larger;
   display: flex;
   width: 100%;
-  align-items: center;
+  flex-direction: row;
+  align-content: stretch;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: baseline;
 }
 
 [class="form-group nm_lk"] {
