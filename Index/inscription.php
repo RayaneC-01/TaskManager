@@ -26,14 +26,6 @@ session_start();
                 <div class="col-md-12">
                     <div class="_lk_de">
                         <div class="form-03-main">
-                            <?php
-                            // Afficher les erreurs s'il y en a
-                            if (isset($_SESSION['message_error'])) {
-                                echo '<div class="alert alert-danger" role="alert">' . $_SESSION['message_error'] . '</div>';
-                                unset($_SESSION['message_error']);
-                            }
-
-                            ?>
                             <div class="logo">
                                 <img src="/Images/user.png" alt="User logo">
                             </div>
@@ -51,6 +43,13 @@ session_start();
                                     </ol>
                                 </div>
                             </div>
+                            <?php
+                            // Afficher les erreurs s'il y en a
+                            if (isset($_SESSION['message_error'])) {
+                                echo '<div class="alert alert-danger" role="alert">' . $_SESSION['message_error'] . '</div>';
+                                unset($_SESSION['message_error']); // Effacer le message après l'avoir affiché
+                            }
+                            ?>
                             <form id="inscriptionForm" method="POST" action="inscription_traitement.php">
                                 <div class="form-group">
                                     <label for="first_name">Prénom: </label>
