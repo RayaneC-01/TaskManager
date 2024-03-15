@@ -49,7 +49,7 @@ require_once 'header.php'; ?>
     <div class="container">
 
         <p class="h3">
-            Bonjour , <strong>
+            Bonjour, <strong>
                 <?php echo $message ?>
             </strong>!
         </p>
