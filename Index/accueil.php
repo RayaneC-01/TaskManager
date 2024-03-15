@@ -24,17 +24,17 @@ require_once 'header.php'; ?>
             // Parcourir les résultats et afficher chaque tâche
             while ($row = $stmt->fetch()) {
                 echo "<li class='task-item added-task d-flex justify-content-between align-items-center'>";
-                echo "<span>{$row['title']}</span>";
+                echo "<span class='h4'>{$row['title']}</span>";
 
                 // Vérifier si la tâche est marquée comme terminée ou non
                 if ($row['completed'] == 1) {
-                    echo "<span class='completed-task'>Tâche terminée</span>";
+                    echo "<span class='completed-task h4'>Tâche terminée</span>";
                 } else {
                     // Afficher la date d'échéance si elle est définie
                     if ($row['due_date'] === null) {
-                        echo "<span>Aucune date d'échéance définie</span>";
+                        echo "<span class='h4'>Aucune date d'échéance définie</span>";
                     } else {
-                        echo "<span>Date d'échéance : {$row['due_date']}</span>";
+                        echo "<span class='h4'>Date d'échéance : {$row['due_date']}</span>";
                     }
                 }
 
@@ -53,9 +53,12 @@ require_once 'header.php'; ?>
                 echo "<button type='submit' class='btn btn-outline-success btn-xl'>Terminé</button>";
                 echo "</form>";
 
-                // Lien "Modifier" vers modification_tache.php avec l'ID de la tâche comme paramètre
-                echo "<a href='modification_tache.php?id={$row['id']}'>Modifier</a>";
-                echo "</li>";
+                // Formulaire caché pour envoyer l'ID de la tâche à modification_tache.php
+                echo "<form action='modification_tache.php' method='post'>";
+                echo "<input type='hidden' name='id' value='{$row['id']}'>";
+                echo "<button type='submit' class='btn btn-outline-primary'>Modifier</button>";
+                echo "</form>";
+
             }
 
         } catch (PDOException $e) {
@@ -79,27 +82,26 @@ require_once 'header.php'; ?>
             <input type="text" id="custom_due_date" name="custom_due_date" placeholder="D-M-Y" style="display: none;">
         </div>
         <button class="bouton-requiert-connexion" type="submit">Ajouter</button>
-        <?php
-        // Afficher un message de succès s'il existe
-        if (isset($_SESSION['message_success'])) {
-            echo "<div class='alert alert-success'>{$_SESSION['message_success']}</div>";
-            unset($_SESSION['message_success']); // Effacer le message après l'avoir affiché
-        }
-
-        // Afficher un message d'erreur s'il existe
-        if (isset($_SESSION['message_error'])) {
-            echo "<div class='alert alert-danger'>{$_SESSION['message_error']}</div>";
-            unset($_SESSION['message_error']); // Effacer le message après l'avoir affiché
-        }
-        ?>
-
     </form>
 
+    <?php
+    // Afficher un message de succès s'il existe
+    if (isset($_SESSION['message_success'])) {
+        echo "<div class='alert alert-success'>{$_SESSION['message_success']}</div>";
+        unset($_SESSION['message_success']); // Effacer le message après l'avoir affiché
+    }
+
+    // Afficher un message d'erreur s'il existe
+    if (isset($_SESSION['message_error'])) {
+        echo "<div class='alert alert-danger'>{$_SESSION['message_error']}</div>";
+        unset($_SESSION['message_error']); // Effacer le message après l'avoir affiché
+    }
+    ?>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+</script>
 
 <script src="/script/script.js">
 </script>
