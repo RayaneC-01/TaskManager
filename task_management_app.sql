@@ -8,7 +8,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -44,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(15) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -54,13 +53,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Modifiez la structure de la table `users` pour définir `id` avec auto-incrémentation
+ALTER TABLE `users` MODIFY COLUMN `id` INT AUTO_INCREMENT;
+
 --
 -- Déchargement des données de la table `users`
 --
-
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `first_name`, `last_name`) VALUES
-(0, 'jojosKj', 'kj.jojo@gmail.com', '$2y$10$B0PY1NYjzmQUMIjzYofN5.Ir5EnoT4ykxeAHRdz3T5nvCIayUSj4u', '2024-03-13 20:21:24', 'jojo', 'kj');
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
