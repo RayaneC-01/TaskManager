@@ -1,7 +1,7 @@
 <?php
 // Vérifier si l'utilisateur est connecté avant d'afficher cette page
 session_start();
-if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
+if (!isset ($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header('Location: connexion.php');
     exit;
@@ -16,11 +16,12 @@ require_once 'header.php'; ?>
     <ul>
         <?php
         // Afficher les tâches depuis la base de données
-        require 'connexion_database.php';
+        require '../config/connexion_database.php';
         try {
-            // Préparer la requête de sélection des tâches
-            $stmt = $conn->query("SELECT * FROM tasks");
-
+            // Préparer la requête de sélection des tâches de l'utilisateur connecté
+            $stmt = $conn->prepare("SELECT * FROM tasks WHERE user_id = :user_id");
+            $stmt->bindParam(':user_id', $_SESSION['utilisateur_connecte']);
+            $stmt->execute();
             // Parcourir les résultats et afficher chaque tâche
             while ($row = $stmt->fetch()) {
                 echo "<li class='task-item added-task d-flex justify-content-between align-items-center'>";
@@ -50,8 +51,18 @@ require_once 'header.php'; ?>
                 // Bouton "Terminé"
                 echo "<form action='task_done.php' method='post'>";
                 echo "<input type='hidden' name='id' value='{$row['id']}'>";
-                echo "<button type='submit' class='btn btn-outline-success btn-xl'>Terminé</button>";
+
+                switch ($row['completed']) {
+                    case 0:
+                        echo "<button type='submit' class='btn btn-outline-secondary btn-xl' name='task_undone'>Terminer</button>";
+                        break;
+                    case 1:
+                        echo "<button type='submit' class='btn btn-success btn-xl' name='task_done'>Terminé</button>";
+                        break;
+                }
+
                 echo "</form>";
+
 
                 // Formulaire caché pour envoyer l'ID de la tâche à modification_tache.php
                 echo "<form action='modification_tache.php' method='post'>";
@@ -86,13 +97,13 @@ require_once 'header.php'; ?>
 
     <?php
     // Afficher un message de succès s'il existe
-    if (isset($_SESSION['message_success'])) {
+    if (isset ($_SESSION['message_success'])) {
         echo "<div class='alert alert-success'>{$_SESSION['message_success']}</div>";
         unset($_SESSION['message_success']); // Effacer le message après l'avoir affiché
     }
 
     // Afficher un message d'erreur s'il existe
-    if (isset($_SESSION['message_error'])) {
+    if (isset ($_SESSION['message_error'])) {
         echo "<div class='alert alert-danger'>{$_SESSION['message_error']}</div>";
         unset($_SESSION['message_error']); // Effacer le message après l'avoir affiché
     }
@@ -101,7 +112,7 @@ require_once 'header.php'; ?>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-</script>
+    </script>
 
 <script src="/script/script.js">
 </script>
