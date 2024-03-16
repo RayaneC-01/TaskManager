@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-require_once 'connexion_database.php';
+require_once '../config/connexion_database.php';
 
 // Vérifier si le formulaire d'inscription a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Vérifier si tous les champs requis sont renseignés
-    if (isset($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'], $_POST['confirm_password'], $_POST['username'])) {
+    if (isset ($_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'], $_POST['confirm_password'], $_POST['username'])) {
         // Récupérer les valeurs du formulaire
         $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
