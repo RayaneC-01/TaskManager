@@ -1,6 +1,20 @@
 <?php
 // Vérifier si l'utilisateur est connecté avant d'afficher cette page
 session_start();
+
+// Vérifier s'il y a un message d'erreur
+if (isset ($_SESSION['message_error'])) {
+    echo "<div class='alert alert-danger'>{$_SESSION['message_error']}</div>";
+    unset($_SESSION['message_error']); // Supprimer le message d'erreur après l'avoir affiché
+}
+
+// Vérifier s'il y a un message de succès
+if (isset ($_SESSION['message_success'])) {
+    echo "<div class='alert alert-success'>{$_SESSION['message_success']}</div>";
+    unset($_SESSION['message_success']); // Supprimer le message de succès après l'avoir affiché
+}
+
+
 if (!isset ($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header('Location: connexion.php');
@@ -17,6 +31,7 @@ require_once 'header.php'; ?>
         <?php
         // Afficher les tâches depuis la base de données
         require '../config/connexion_database.php';
+
         try {
             // Préparer la requête de sélection des tâches de l'utilisateur connecté
             $stmt = $conn->prepare("SELECT * FROM tasks WHERE user_id = :user_id");
@@ -95,19 +110,7 @@ require_once 'header.php'; ?>
         <button class="bouton-requiert-connexion" type="submit">Ajouter</button>
     </form>
 
-    <?php
-    // Afficher un message de succès s'il existe
-    if (isset ($_SESSION['message_success'])) {
-        echo "<div class='alert alert-success'>{$_SESSION['message_success']}</div>";
-        unset($_SESSION['message_success']); // Effacer le message après l'avoir affiché
-    }
 
-    // Afficher un message d'erreur s'il existe
-    if (isset ($_SESSION['message_error'])) {
-        echo "<div class='alert alert-danger'>{$_SESSION['message_error']}</div>";
-        unset($_SESSION['message_error']); // Effacer le message après l'avoir affiché
-    }
-    ?>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
