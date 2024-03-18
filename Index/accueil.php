@@ -3,7 +3,7 @@
 session_start();
 
 
-if (!isset ($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
+if (!isset ($_SESSION['identifier']) || empty ($_SESSION['identifier'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header('Location: connexion.php');
     exit;
@@ -70,15 +70,11 @@ require_once 'header.php';
                 //echo "<span class='priority'>Priorité : {$row['priority']}</span>";
                 echo "</aside>";
                 // Vérifier si la tâche est marquée comme terminée ou non
+                // Afficher la tâche terminée ou la date d'échéance
                 if ($row['completed'] == 1) {
                     echo "<span class='completed-task h4'>Tâche terminée</span>";
                 } else {
-                    // Afficher la date d'échéance si elle est définie
-                    if ($row['due_date'] === null) {
-                        echo "<span class='h4'>Aucune date d'échéance définie</span>";
-                    } else {
-                        echo "<span class='h4'>Date d'échéance : {$row['due_date']}</span>";
-                    }
+                    echo "<span class='h4'>" . ($row['due_date'] ? "Date d'échéance : " . htmlspecialchars($row['due_date']) : "Aucune date d'échéance définie") . "</span>";
                 }
                 // Déterminer la classe CSS en fonction de l'état de la tâche (terminée ou non)
                 $taskClass = ($row['completed'] == 1) ? 'completed-task' : '';
