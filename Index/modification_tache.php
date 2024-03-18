@@ -1,14 +1,14 @@
 <?php
 // Vérifier si l'utilisateur est connecté
 session_start();
-if (!isset($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
+if (!isset ($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header('Location: connexion.php');
     exit;
 }
 
 // Vérifier si l'ID de la tâche à modifier est présent dans les données POST
-if (!isset($_POST['id'])) {
+if (!isset ($_POST['id'])) {
     // Rediriger vers la page d'accueil si aucun ID n'est fourni
     header('Location: accueil.php');
     exit;
@@ -18,7 +18,7 @@ if (!isset($_POST['id'])) {
 $id_tache = $_POST['id'];
 
 // Connexion à la base de données
-require 'connexion_database.php';
+require_once '../config/connexion_database.php';
 
 try {
     // Préparer la requête pour récupérer les détails de la tâche à partir de son ID
@@ -44,7 +44,7 @@ try {
 }
 
 // Vérifier si des données de formulaire ont été soumises pour la mise à jour de la tâche
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['modifier_tache'])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset ($_POST['modifier_tache'])) {
     try {
         // Préparer la requête pour mettre à jour la tâche dans la base de données
         $stmt = $conn->prepare("UPDATE tasks SET title = :title, due_date = :due_date WHERE id = :id");
