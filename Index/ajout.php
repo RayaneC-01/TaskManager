@@ -2,16 +2,28 @@
 session_start();
 
 // Vérifier si l'utilisateur est connecté
-if (!isset ($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
+if (!isset ($_SESSION['identifier'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header('Location: connexion.php');
     exit;
 }
 
+// Récupérer l'identifiant de l'utilisateur connecté
+$user_id = $_SESSION['utilisateur_connecte'];
+
 require_once '../config/connexion_database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
-    $titre = $_POST['title'];
+    // Validation et nettoyage du titre de la tâche
+    $titre = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+
+    // Vérifier si le titre est vide après le nettoyage
+    if (empty ($titre)) {
+        $_SESSION['message_error'] = "Erreur : Le titre de la tâche est requis.";
+        header('Location: accueil.php');
+        exit;
+    }
+
     $due_date = null;
     $priority = $_POST['priority']; // Récupération de la priorité depuis le formulaire
 
@@ -60,13 +72,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
     }
 
     try {
-        // Insérez la tâche dans la base de données avec la priorité spécifiée
+        // Insérer la tâche dans la base de données avec la priorité spécifiée
         $stmt = $conn->prepare("INSERT INTO tasks (user_id, title, due_date, priority) VALUES (:user_id, :title, :due_date, :priority)");
-        $stmt->bindParam(':user_id', $_SESSION['utilisateur_connecte']);
-        $stmt->bindParam(':title', $titre); // Correction de la variable ici
-        $stmt->bindParam(':due_date', $due_date);
-        $stmt->bindParam(':priority', $priority);
-        $stmt->execute();
+        $stmt->execute([
+            ':user_id' => $user_id,
+            ':title' => $titre,
+            ':due_date' => $due_date,
+            ':priority' => $priority
+        ]);
 
         // Rediriger vers la page d'accueil avec un message de succès
         $_SESSION['message_success'] = "La tâche a été ajoutée avec succès.";
@@ -79,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
         exit;
     }
 } else {
-    // Si tous les champs requis ne sont pas soumis, redirigez avec un message d'erreur
+    // Si tous les champs requis ne sont pas soumis, rediriger avec un message d'erreur
     $_SESSION['message_error'] = "Veuillez remplir tous les champs.";
     header("Location: accueil.php");
     exit;
