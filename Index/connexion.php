@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -28,7 +26,7 @@ session_start();
                         <div class="form-03-main">
                             <?php
                             // Afficher les erreurs s'il y en a
-                            if (isset($_SESSION['error'])) {
+                            if (isset ($_SESSION['error'])) {
                                 echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error'] . '</div>';
                                 // Supprimer l'erreur de la session pour qu'elle ne s'affiche qu'une fois
                                 unset($_SESSION['error']);
@@ -52,17 +50,17 @@ session_start();
                                     </ol>
                                 </div>
                             </div>
-                            <form id="login_Form" method="POST" action="connexion_traitement.php">
+                            <form id="login_Form" method="POST" action="../Index/connexion_traitement.php">
                                 <!-- Assurez-vous que le formulaire pointe vers la bonne page PHP -->
                                 <div class="form-group">
-                                    <label for="identifier">nom d'utilisateur ou e-mail : </label>
+                                    <label for="identifier">nom d'utilisateur ou e-mail </label>
                                     <input type="text" id="identifier" name="identifier" class="form-control"
-                                        placeholder="nom d'utilisateur ou e-mail" required />
+                                        placeholder="" required />
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">mot de passe :</label>
+                                    <label for="password">mot de passe</label>
                                     <input type="password" id="password" name="password" class="form-control"
-                                        placeholder="Entrez votre mot de passe" required />
+                                        required />
                                 </div>
                                 <div class="checkbox form-group">
                                     <div class="form-check">
@@ -70,11 +68,13 @@ session_start();
                                         <label class="form-check-label remember-label" for="remember">Se
                                             Rappeler de moi</label>
                                     </div>
-                                    <label for="password" class="password">Mot de passe oublié</label>
+                                    <!-- <div class="link forget-pass"><a href="forgot_password.php">Mot de passe
+                                            oublié?</a></div> -->
                                 </div>
                                 <div class="button-group">
-                                    <button type="submit" class="btn btn-outline-primary btn-lg">Connexion</button>
-                                    <p>Vous n'avez pas de compte?<a href="inscription.php" class="button-text"> Créer
+                                    <button type="submit" class="btn btn-primary btn-lg">Connexion</button>
+                                    <p>Vous n'avez pas de compte?<a href="inscription.php" class="button-text">
+                                            Créer
                                             un compte</a> </p>
                                 </div>
                             </form>
