@@ -2,18 +2,6 @@
 // Vérifier si l'utilisateur est connecté avant d'afficher cette page
 session_start();
 
-// Vérifier s'il y a un message d'erreur
-if (isset ($_SESSION['message_error'])) {
-    echo "<div class='alert alert-danger'>{$_SESSION['message_error']}</div>";
-    unset($_SESSION['message_error']); // Supprimer le message d'erreur après l'avoir affiché
-}
-
-// Vérifier s'il y a un message de succès
-if (isset ($_SESSION['message_success'])) {
-    echo "<div class='alert alert-success'>{$_SESSION['message_success']}</div>";
-    unset($_SESSION['message_success']); // Supprimer le message de succès après l'avoir affiché
-}
-
 
 if (!isset ($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connecte']) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
@@ -22,9 +10,24 @@ if (!isset ($_SESSION['utilisateur_connecte']) || !$_SESSION['utilisateur_connec
 }
 
 $pageTitle = "Page d'accueil Gestionnaire de tâches";
-require_once 'header.php'; ?>
+require_once 'header.php';
+
+?>
 
 <div class="container">
+    <?php
+    // Vérifier s'il y a un message d'erreur pour la tache 
+    if (isset ($_SESSION['message_error'])) {
+        echo "<div class='alert alert-danger'>{$_SESSION['message_error']}</div>";
+        unset($_SESSION['message_error']); // Supprimer le message d'erreur après l'avoir affiché
+    }
+
+    // Vérifier s'il y a un message de succès
+    if (isset ($_SESSION['message_success'])) {
+        echo "<div class='alert alert-success'>{$_SESSION['message_success']}</div>";
+        unset($_SESSION['message_success']); // Supprimer le message de succès après l'avoir affiché
+    }
+    ?>
     <h2 class="title_center">Gestionnaire de tâches</h2>
     <h2>Liste des tâches : </h2>
     <ul>
@@ -42,6 +45,30 @@ require_once 'header.php'; ?>
                 echo "<li class='task-item added-task d-flex justify-content-between align-items-center'>";
                 echo "<span class='h4'>{$row['title']}</span>";
 
+                // Afficher la priorité de la tâche
+                // Balise aside pour afficher la priorité
+                echo "<aside class='priority-container'>";
+                $priorityText = '';
+                switch ($row['priority']) {
+                    case 1:
+                        $priorityText = 'Faible';
+                        $priorityClass = 'low-priority';
+                        break;
+                    case 2:
+                        $priorityText = 'Moyenne';
+                        $priorityClass = 'medium-priority';
+                        break;
+                    case 3:
+                        $priorityText = 'Élevée';
+                        $priorityClass = 'high-priority';
+                        break;
+                    default:
+                        $priorityText = 'Inconnue';
+                        break;
+                }
+                echo "<span class='priority $priorityClass'>Priorité : $priorityText</span>";
+                //echo "<span class='priority'>Priorité : {$row['priority']}</span>";
+                echo "</aside>";
                 // Vérifier si la tâche est marquée comme terminée ou non
                 if ($row['completed'] == 1) {
                     echo "<span class='completed-task h4'>Tâche terminée</span>";
@@ -53,7 +80,6 @@ require_once 'header.php'; ?>
                         echo "<span class='h4'>Date d'échéance : {$row['due_date']}</span>";
                     }
                 }
-
                 // Déterminer la classe CSS en fonction de l'état de la tâche (terminée ou non)
                 $taskClass = ($row['completed'] == 1) ? 'completed-task' : '';
 
@@ -87,6 +113,7 @@ require_once 'header.php'; ?>
 
             }
 
+
         } catch (PDOException $e) {
             // En cas d'erreur, afficher un message d'erreur
             echo "Erreur : " . $e->getMessage();
@@ -96,9 +123,26 @@ require_once 'header.php'; ?>
     </ul>
     <h4>Ajouter une tâche </h4>
     <form action="ajout.php" method="post" id="task_form">
-        <input type="text" name="title" placeholder="Titre de la tâche" required>
+        <div class="form-group">
+            <label for="title">Titre de la tâche :</label>
+            <input type="text" name="title" id="title" placeholder="Titre de la tâche" required>
+        </div>
+
+        <!-- Champ de priorité -->
+        <div class=" form-group">
+            <label for="priority">Priorité :</label>
+            <select name="priority" id="priority" class="priority-select">
+                <option value="1">1 - Faible</option>
+                <option value="2">2 - Moyenne</option>
+                <option value="3">3 - Élevée</option>
+            </select>
+            <span>Note : 1 est le plus faible et 3 est le plus élevé.</span>
+
+        </div>
+
         <div class="date-wrapper">
-            <select name="due_date" id="due_date_select">
+            <label for="due_date_select">Date d'échéance :</label>
+            <select name="due_date" id="due_date_select" class="date-select">
                 <option value="today">Aujourd'hui</option>
                 <option value="tomorrow">Demain</option>
                 <option value="next_week">La semaine prochaine</option>
@@ -107,8 +151,9 @@ require_once 'header.php'; ?>
             </select>
             <input type="text" id="custom_due_date" name="custom_due_date" placeholder="D-M-Y" style="display: none;">
         </div>
-        <button class="bouton-requiert-connexion" type="submit">Ajouter</button>
+        <button class="bouton-requiert-connexion btn btn-primary btn-lg" type="submit">Ajouter</button>
     </form>
+
 
 
 </div>
