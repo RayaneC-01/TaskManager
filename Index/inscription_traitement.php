@@ -5,13 +5,6 @@ require_once '../config/connexion_database.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $required_fields = ['first_name', 'last_name', 'email', 'password', 'confirm_password', 'username'];
 
-
-    // array_intersect() compare deux tableaux et retourne les éléments communs entre eux
-    // Ici, elle est utilisée pour vérifier si toutes les clés des champs requis sont présentes dans les données POST
-    // array_keys() est utilisée pour extraire les clés des données POST (noms des champs soumis dans le formulaire)
-    // La fonction count() est utilisée pour compter le nombre d'éléments communs entre les clés des champs requis et les clés des données POST
-    // Si ce nombre est égal au nombre total des champs requis, cela signifie que tous les champs requis ont été soumis
-
     // Vérifier si tous les champs requis sont renseignés
     if (count(array_intersect($required_fields, array_keys($_POST))) === count($required_fields)) {
         $first_name = $_POST['first_name'];
@@ -51,9 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, created_at, username) VALUES (:first_name, :last_name, :email, :password, :created_at, :username)");
                         $stmt->execute([':first_name' => $first_name, ':last_name' => $last_name, ':email' => $email, ':password' => $hashed_password, ':created_at' => $created_at, ':username' => $username]);
 
-                        var_dump($stmt);
                         // Après l'insertion réussie des données dans la base de données
-                        $_SESSION['message_success'] = "Inscription réussie ! Bienvenue sur la  page d'accueil.";
+                        $_SESSION['message_success'] = "Inscription réussie ! Bienvenue sur la page d'accueil.";
 
                         // Redirection vers la page d'accueil après l'inscription
                         header("Location: ../Index/accueil.php");
@@ -64,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION['message_error'] = "Erreur lors de l'inscription : " . $e->getMessage();
                     }
                 } else {
-                    $_SESSION['message_error'] = "L'adresse e-mail est déjà utilisée. Veuillez en choisir une autre.";
+                    $_SESSION['message_error'] = "Le nom d'utilisateur est déjà utilisé. Veuillez en choisir un autre.";
                 }
             } else {
                 $_SESSION['message_error'] = "L'adresse e-mail n'est pas valide.";
