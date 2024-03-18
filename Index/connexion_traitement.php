@@ -22,7 +22,7 @@ if (isset ($_POST['identifier'], $_POST['password'])) {
             if (password_verify($_POST['password'], $hashed_password)) {
 
                 $_SESSION['utilisateur_connecte'] = true; // Définir l'utilisateur comme connecté
-                $_SESSION['identifier'] = $row['username']; // Stocker le nom d'utilisateur dans la session
+                $_SESSION['utilisateur_connecte'] = $row['username']; //identifiant approprié de l'utilisateur
 
                 // Récupérez la date de création du compte depuis la base de données
                 $last_connexion = $row['last_connexion'];
