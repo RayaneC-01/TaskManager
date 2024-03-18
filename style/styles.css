@@ -6,7 +6,8 @@
   box-shadow: 0 0 0 inset red;
 }
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   background-color: #f9f9f9;
 }
 
@@ -140,4 +141,41 @@ li {
 }
 span {
   font-weight: lighter;
+}
+
+/* Style pour la sélection de priorité */
+.date-select,
+.priority-select {
+  border: 3px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 16px;
+  width: 200px;
+}
+.priority-container {
+  display: inline-block;
+  margin-left: 10px; /* Ajustez selon vos préférences */
+}
+
+.priority {
+  font-weight: bold;
+}
+
+.low-priority {
+  color: rgb(61, 96, 7); /* Couleur pour la priorité faible */
+}
+
+.medium-priority {
+  color: orangered; /* Couleur pour la priorité moyenne */
+}
+
+.high-priority {
+  color: crimson; /* Couleur pour la priorité élevée */
+}
+
+.form-group span {
+  display: flex;
+  color: rgb(193, 29, 29);
+  font-size: 16px;
+  font-weight: 400;
 }
