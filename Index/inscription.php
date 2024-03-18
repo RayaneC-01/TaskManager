@@ -45,12 +45,12 @@ session_start();
                             </div>
                             <?php
                             // Afficher les erreurs s'il y en a
-                            if (isset($_SESSION['message_error'])) {
+                            if (isset ($_SESSION['message_error'])) {
                                 echo '<div class="alert alert-danger" role="alert">' . $_SESSION['message_error'] . '</div>';
                                 unset($_SESSION['message_error']); // Effacer le message après l'avoir affiché
                             }
                             ?>
-                            <form id="inscriptionForm" method="POST" action="inscription_traitement.php">
+                            <form id="inscriptionForm" method="POST" action="../Index/inscription_traitement.php">
                                 <div class="form-group">
                                     <label for="first_name">Prénom: </label>
                                     <input type="text" id="first_name" name="first_name" class="form-control"
