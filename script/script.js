@@ -89,3 +89,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Récupérer le champ de mot de passe
+let passwordInput = document.getElementById('password');
+
+// Ajouter un écouteur d'événements pour détecter le clic sur le champ de mot de passe
+passwordInput.addEventListener('click', function () {
+    // Ajouter la classe 'active' lorsque le champ est cliqué
+    passwordInput.classList.add('active');
+});
+
+// Ajouter un écouteur d'événements pour détecter le clic à l'extérieur du champ de mot de passe
+document.addEventListener('click', function (event) {
+    // Vérifier si le clic n'est pas sur le champ de mot de passe
+    if (event.target !== passwordInput) {
+        // Supprimer la classe 'active' lorsque le clic est en dehors du champ de mot de passe
+        passwordInput.classList.remove('active');
+    }
+});
+
