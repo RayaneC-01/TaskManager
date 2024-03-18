@@ -1,12 +1,12 @@
 <?php
 // Connectez-vous à votre base de données
-require 'connexion_database.php';
+require_once '../config/connexion_database.php';
 
 //démarrer la session
 session_start();
 
 // Vérifiez si l'utilisateur est connecté
-if (isset($_SESSION['identifier'])) {
+if (isset ($_SESSION['identifier'])) {
     // Récupérez l'identifiant de l'utilisateur depuis la session
     $username = $_SESSION['identifier'];
     $message = $username;
@@ -30,7 +30,7 @@ if (isset($_SESSION['identifier'])) {
         $last_connexion = $row['last_connexion'];
     } else {
         // Gérer le cas où l'utilisateur n'est pas trouvé dans la base de données
-        echo "Utilisateur introuvable.";
+        echo "<div class='alert alert-danger'>Utilisateur introuvable.</div>";
     }
 } else {
     // Gérer le cas où l'utilisateur n'est pas connecté
@@ -59,7 +59,8 @@ require_once 'header.php'; ?>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item h4">Nom:
                             <strong>
-                                <?php echo $last_name ?>
+                                <?php echo $last_name;
+                                ?>
                             </strong>
                         </li>
                         <li class=" list-group-item h4">Prénom: <strong>
