@@ -1,7 +1,7 @@
 <?php
-require 'connexion_database.php';
+require_once '../config/connexion_database.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['id'])) {
     $id = $_POST['id'];
 
     try {
