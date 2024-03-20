@@ -43,15 +43,15 @@ require_once 'header.php'; ?>
                 $stmt->execute();
 
                 var_dump($stmt);
-                // // Récupérez l'identifiant de l'utilisateur
-                // $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                // $user_id = $row['id'];
-        
-                // // Préparez et exécutez une requête SQL pour sélectionner les tâches de l'utilisateur
-                // $stmt_tasks = $conn->prepare("SELECT * FROM tasks WHERE user_id = :user_id");
-                // $stmt_tasks->bindParam(':user_id', $user_id);
-                // $stmt_tasks->execute();
-        
+                // Récupérez l'identifiant de l'utilisateur
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $user_id = $row['id'];
+                var_dump($user_id);
+                // Préparez et exécutez une requête SQL pour sélectionner les tâches de l'utilisateur
+                $stmt_tasks = $conn->prepare("SELECT * FROM tasks WHERE user_id = :user_id");
+                $stmt_tasks->bindParam(':user_id', $user_id);
+                $stmt_tasks->execute();
+
                 // Parcourir les résultats et afficher chaque tâche
                 while ($row = $stmt_tasks->fetch()) {
                     echo "<li class='task-item added-task d-flex justify-content-between align-items-center'>";
@@ -161,7 +161,7 @@ require_once 'header.php'; ?>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-</script>
+    </script>
 
 <script src="/script/script.js">
 </script>
