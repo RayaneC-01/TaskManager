@@ -21,10 +21,9 @@ if (isset ($_POST['identifier'], $_POST['password'])) {
             // Vérifier si le mot de passe est correct
             if (password_verify($_POST['password'], $hashed_password)) {
 
-                $_SESSION['utilisateur_connecte'] = true; // Définir l'utilisateur comme connecté
-                $_SESSION['utilisateur_connecte'] = $row['username']; //identifiant approprié de l'utilisateur
+                $_SESSION['utilisateur_connecte'] = $row['username']; // Identifiant de l'utilisateur
 
-                // Récupérez la date de création du compte depuis la base de données
+                // Récupérer la date de création du compte depuis la base de données
                 $last_connexion = $row['last_connexion'];
 
                 // Mettre à jour la colonne last_connexion avec la date et l'heure actuelles

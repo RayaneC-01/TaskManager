@@ -2,7 +2,7 @@
 session_start();
 
 // Vérifier si l'utilisateur est connecté
-if (!isset ($_SESSION['identifier'])) {
+if (!isset ($_SESSION['utilisateur_connecte'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header('Location: connexion.php');
     exit;
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
     }
 
     try {
-        // Insérez la tâche dans la base de données avec la priorité spécifiée
+        // Insérer la tâche dans la base de données avec la priorité spécifiée
         $stmt = $conn->prepare("INSERT INTO tasks (user_id, title, due_date, priority) VALUES (:user_id, :title, :due_date, :priority)");
         $stmt->bindParam(':user_id', $user_id);
         $stmt->bindParam(':title', $titre); // Correction de la variable ici

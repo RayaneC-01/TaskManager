@@ -6,31 +6,38 @@ require_once '../config/connexion_database.php';
 session_start();
 
 // Vérifiez si l'utilisateur est connecté
-if (isset ($_SESSION['username'])) {
+if (isset ($_SESSION['utilisateur_connecte'])) {
     // Récupérez l'identifiant de l'utilisateur depuis la session
-    $username = $_SESSION['username'];
+    $username = $_SESSION['utilisateur_connecte'];
     $message = $username;
 
-    // Préparez et exécutez une requête SQL pour sélectionner les informations de l'utilisateur
-    $stmt = $conn->prepare("SELECT first_name, last_name, email, created_at, last_connexion FROM users WHERE username = :username");
+    // Préparez et exécutez une requête SQL pour sélectionner le prénom de l'utilisateur
+    $stmt = $conn->prepare("SELECT id, first_name, last_name, email, created_at, last_connexion FROM users WHERE username = :username");
     $stmt->bindParam(':username', $username);
     $stmt->execute();
 
     // Récupérez le résultat de la requête
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Vérifiez si le résultat est non vide
-    if ($row) {
-        // Récupérez les informations de l'utilisateur
+    // Vérifiez si le résultat est non vide et que la clé 'id' est définie
+    if ($row && isset ($row['id'])) {
+        // Récupérez le prénom de l'utilisateur
         $first_name = $row['first_name'];
         $last_name = $row['last_name'];
         $email = $row['email'];
         $created_at = $row['created_at'];
         $last_connexion = $row['last_connexion'];
+
+        // Récupérer les tâches de l'utilisateur connecté
+        $user_id = $row['id']; // Ajoutez cette ligne pour récupérer l'ID de l'utilisateur
+        $stmt_tasks = $conn->prepare("SELECT * FROM tasks WHERE user_id = :user_id");
+        $stmt_tasks->bindParam(':user_id', $user_id);
+        $stmt_tasks->execute();
     } else {
-        // Gérer le cas où l'utilisateur n'est pas trouvé dans la base de données
-        echo "<div class='alert alert-danger'>Utilisateur introuvable.</div>";
+        // Gérer le cas où l'utilisateur n'est pas trouvé dans la base de données ou l'ID n'est pas défini
+        echo "<div class='alert alert-danger'>Utilisateur introuvable ou ID non défini.</div>";
     }
+
 } else {
     // Gérer le cas où l'utilisateur n'est pas connecté
     header('Location: connexion.php');
@@ -40,11 +47,12 @@ if (isset ($_SESSION['username'])) {
 
 <?php
 $pageTitle = "Tableau de Bord Gestionnaire de tâches";
-require_once 'header.php';
-?>
+require_once 'header.php'; ?>
 
 <body>
+
     <div class="container">
+
         <p class="h3">
             Bonjour, <strong>
                 <?php echo $message ?>
@@ -54,20 +62,21 @@ require_once 'header.php';
             <div class="card">
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item h4">Nom: <strong>
+                        <li class="list-group-item h4">Nom:
+                            <strong>
                                 <?php echo $last_name; ?>
-                            </strong></li>
+                            </strong>
+                        </li>
                         <li class="list-group-item h4">Prénom: <strong>
                                 <?php echo $first_name; ?>
-                            </strong></li>
+                            </strong>
+                        </li>
                         <li class="list-group-item h4">Email: <strong>
                                 <?php echo $email; ?>
                             </strong></li>
-                        <li class="list-group-item h4">Date de création du compte:
-                            <strong>
+                        <li class="list-group-item h4">Date de création du compte: <strong>
                                 <?php echo $created_at; ?>
-                            </strong>
-                        </li>
+                            </strong></li>
                         <li class="list-group-item h4">Dernière Connexion est le:
                             <strong>
                                 <?php echo $last_connexion; ?>
@@ -77,5 +86,24 @@ require_once 'header.php';
                 </div>
             </div>
         </div>
+
+        <!-- Afficher les tâches de l'utilisateur -->
+        <div class="task-list">
+            <h4>Vos Tâches:</h4>
+            <ul class="list-group">
+                <?php while ($task = $stmt_tasks->fetch(PDO::FETCH_ASSOC)): ?>
+                <li class="list-group-item h4">
+                    <strong>
+                        <?php echo $task['title']; ?>
+                    </strong>
+                    est de niveau
+                    <?php echo $task['priority']; ?>
+                </li>
+                <?php endwhile; ?>
+            </ul>
+        </div>
     </div>
+
 </body>
+
+</html>

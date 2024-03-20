@@ -162,7 +162,7 @@ span {
 }
 
 .low-priority {
-  color: rgb(61, 96, 7); /* Couleur pour la priorité faible */
+  color: greenyellow; /* Couleur pour la priorité faible */
 }
 
 .medium-priority {
@@ -178,4 +178,17 @@ span {
   color: rgb(193, 29, 29);
   font-size: 16px;
   font-weight: 400;
+}
+
+.priority-select {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 16px;
+  width: 200px;
+}
+
+/* Style pour les options de la sélection */
+.priority-select option {
+  font-size: 16px;
 }
