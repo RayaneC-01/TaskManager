@@ -96,14 +96,16 @@ require_once 'header.php'; ?>
             <h4>Vos Tâches:</h4>
             <ul class="list-group">
                 <?php while ($task = $stmt_tasks->fetch(PDO::FETCH_ASSOC)): ?>
-                    <li class="list-group-item h4">
-                        <strong>
-                            <?php echo $task['title']; ?>
-                        </strong>
-                        est de niveau
-                        <?php echo $task['priority']; ?>
-                    </li>
+                <li class="list-group-item">
+                    <strong>
+                        <?php echo $task['title']; ?>
+                    </strong>
+                    <span class="badge bg-primary">
+                        <?php echo "Priorité : " . $task['priority']; ?>
+                    </span>
+                </li>
                 <?php endwhile; ?>
+
             </ul>
         </div>
     </div>
