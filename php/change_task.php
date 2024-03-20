@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+//(anciennement modification_tache.php)
+
 // Vérifier si l'utilisateur est connecté
 if (!isset ($_SESSION['utilisateur_connecte'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
