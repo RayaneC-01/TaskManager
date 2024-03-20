@@ -16,6 +16,7 @@ if (isset ($_SESSION['utilisateur_connecte'])) {
     $stmt->bindParam(':username', $username);
     $stmt->execute();
 
+
     // Récupérez le résultat de la requête
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -28,11 +29,14 @@ if (isset ($_SESSION['utilisateur_connecte'])) {
         $created_at = $row['created_at'];
         $last_connexion = $row['last_connexion'];
 
+        // Récupérer l'ID de l'utilisateur connecté
+        $user_id = $row['id'];
+
         // Récupérer les tâches de l'utilisateur connecté
-        $user_id = $row['id']; // Ajoutez cette ligne pour récupérer l'ID de l'utilisateur
         $stmt_tasks = $conn->prepare("SELECT * FROM tasks WHERE user_id = :user_id");
         $stmt_tasks->bindParam(':user_id', $user_id);
         $stmt_tasks->execute();
+
     } else {
         // Gérer le cas où l'utilisateur n'est pas trouvé dans la base de données ou l'ID n'est pas défini
         echo "<div class='alert alert-danger'>Utilisateur introuvable ou ID non défini.</div>";
@@ -92,13 +96,13 @@ require_once 'header.php'; ?>
             <h4>Vos Tâches:</h4>
             <ul class="list-group">
                 <?php while ($task = $stmt_tasks->fetch(PDO::FETCH_ASSOC)): ?>
-                <li class="list-group-item h4">
-                    <strong>
-                        <?php echo $task['title']; ?>
-                    </strong>
-                    est de niveau
-                    <?php echo $task['priority']; ?>
-                </li>
+                    <li class="list-group-item h4">
+                        <strong>
+                            <?php echo $task['title']; ?>
+                        </strong>
+                        est de niveau
+                        <?php echo $task['priority']; ?>
+                    </li>
                 <?php endwhile; ?>
             </ul>
         </div>

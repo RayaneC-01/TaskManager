@@ -29,44 +29,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
         exit;
     }
 
-    // Définir les variables pour la date d'échéance et la priorité
-    $due_date = $_POST['due_date'];
-    $priority = $_POST['priority'];
+    // Définir la date d'échéance en fonction de l'option choisie
+    $due_date = '';
 
-    // Vérifier si l'utilisateur a choisi une date personnalisée
-    if ($_POST['due_date'] === 'choose_date') {
-        // Récupérer la date personnalisée à partir du champ de formulaire
-        $due_date = $_POST['custom_due_date'];
+    switch ($_POST['due_date']) {
+        case 'today':
+            $due_date = date('Y-m-d');
+            break;
+        case 'tomorrow':
+            $due_date = date('Y-m-d', strtotime('+1 day'));
+            break;
+        case 'next_week':
+            $due_date = date('Y-m-d', strtotime('+1 week'));
+            break;
+        case 'in_2_week':
+            $due_date = date('Y-m-d', strtotime('+2 week'));
+            break;
+        case 'choose_date':
+            // Si une date personnalisée est sélectionnée, récupérer la valeur du champ personnalisé
+            $custom_due_date = $_POST['custom_due_date'];
 
-        // Vérifier si aucune date n'a été sélectionnée
-        if (empty ($due_date)) {
-            // Afficher un message d'erreur et rediriger vers la page d'accueil
-            $_SESSION['message_error'] = "Erreur : Une date d'échéance est requise.";
-            header('Location: accueil.php');
-            exit;
-        }
-    } else {
-        // Traitement de la date en fonction de l'option choisie
-        switch ($_POST['due_date']) {
-            case 'today':
-                $due_date = date('Y-m-d');
-                break;
-            case 'tomorrow':
-                $due_date = date('Y-m-d', strtotime('+1 day'));
-                break;
-            case 'next_week':
-                $due_date = date('Y-m-d', strtotime('+1 week'));
-                break;
-            case 'in_2_week':
-                $due_date = date('Y-m-d', strtotime('+2 week'));
-                break;
-            default:
-                // Gérer les cas d'erreur ou par défaut
-                $_SESSION['message_error'] = "Veuillez choisir une date ! ";
+            // Vérifier si aucune date n'a été sélectionnée
+            if (empty ($custom_due_date)) {
+                $_SESSION['message_error'] = "Erreur : Une date d'échéance personnalisée est requise.";
                 header('Location: accueil.php');
                 exit;
-        }
+            }
+
+            // Valider la date personnalisée et la formater en format YYYY-MM-DD
+            if (strtotime($custom_due_date) === false) {
+                $_SESSION['message_error'] = "Erreur : Format de date personnalisée invalide.";
+                header('Location: accueil.php');
+                exit;
+            }
+
+            $due_date = date('Y-m-d', strtotime($custom_due_date));
+            break;
+        default:
+            $_SESSION['message_error'] = "Erreur : Option de date d'échéance non reconnue.";
+            header('Location: accueil.php');
+            exit;
     }
+
+    // Définir la priorité
+    $priority = $_POST['priority'];
+
     try {
         // Insérer la tâche dans la base de données avec la priorité spécifiée
         $stmt = $conn->prepare("INSERT INTO tasks (user_id, title, due_date, priority) VALUES (:user_id, :title, :due_date, :priority)");

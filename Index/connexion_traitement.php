@@ -30,7 +30,7 @@ if (isset ($_POST['identifier'], $_POST['password'])) {
                 $update_stmt = $conn->prepare("UPDATE users SET last_connexion = NOW() WHERE username = :identifier");
                 $update_stmt->bindParam(':identifier', $row['username']);
                 $update_stmt->execute();
-
+                var_dump($row['username']);
                 // Rediriger l'utilisateur vers la page d'accueil
                 header("Location: ../Index/accueil.php");
                 exit;

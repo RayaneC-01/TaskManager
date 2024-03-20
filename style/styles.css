@@ -192,3 +192,38 @@ span {
 .priority-select option {
   font-size: 16px;
 }
+
+/* Ajoutez ces règles à la fin de votre fichier CSS */
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 90%; /* Réduisez la largeur du conteneur pour s'adapter aux petits écrans */
+    margin: 20px auto; /* Centrer le conteneur */
+  }
+
+  input[type="text"] {
+    width: 100%; /* Réglez la largeur de l'entrée à 100% pour occuper toute la largeur */
+  }
+
+  .title_center {
+    text-align: center; /* Centrer le titre */
+  }
+
+  .task-item {
+    flex-direction: column; /* Empilez les éléments sur les petits écrans */
+    text-align: center; /* Centrez le contenu */
+  }
+
+  .priority-container {
+    margin-left: 0; /* Réinitialisez la marge gauche */
+    margin-top: 10px; /* Ajoutez un peu d'espace en haut */
+  }
+
+  .button-group {
+    flex-direction: column; /* Empilez les boutons sur les petits écrans */
+  }
+
+  .button-group button {
+    margin-bottom: 10px; /* Ajoutez de l'espace entre les boutons */
+  }
+}

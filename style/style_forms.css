@@ -40,15 +40,19 @@ textarea {
   outline: none;
 }
 .form-02-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   background: url(/Images/bg-01.jpg);
   background-size: cover;
-  object-fit: cover;
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
   z-index: 2;
   overflow: hidden;
 }
+
 ._lk_de {
   background-repeat: no-repeat;
   background-size: cover;
@@ -203,8 +207,26 @@ textarea {
   color: #333;
   font-size: 18px;
 }
+@media screen and (max-width: 768px) {
+  .form-03-main {
+    width: 90%; /* Largeur du formulaire pour les écrans moyens */
+  }
+}
+
 @media screen and (max-width: 600px) {
   .form-03-main {
-    width: 100%;
+    width: 95%; /* Largeur du formulaire pour les petits écrans */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form-control {
+    font-size: 0.9rem; /* Taille de la police pour les petits écrans */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .form-02-main {
+    padding: 0 15px; /* Ajoutez un peu de marge sur les côtés */
   }
 }
