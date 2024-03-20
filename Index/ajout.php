@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
             ':due_date' => $due_date,
             ':priority' => $priority
         ]);
-
+        var_dump($stmt);
         // Rediriger vers la page d'accueil avec un message de succès
         $_SESSION['message_success'] = "La tâche a été ajoutée avec succès.";
         header("Location: accueil.php");
