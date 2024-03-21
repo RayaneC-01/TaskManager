@@ -43,7 +43,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  /* height: 50vh; */
   background: url(/Images/bg-01.jpg);
   background-size: cover;
   background-repeat: no-repeat;

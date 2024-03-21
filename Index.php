@@ -30,7 +30,7 @@ require_once 'php/header.php';
     <ul>
         <?php
         // Afficher les tâches depuis la base de données
-        require '/php/connection_database.php';
+        require_once 'php/connection_database.php';
 
         try {
             if (isset ($_SESSION['utilisateur_connecte'])) {
@@ -74,13 +74,13 @@ require_once 'php/header.php';
                     $taskClass = ($row['completed'] == 1) ? 'completed-task' : '';
 
                     // Bouton "Supprimer"
-                    echo "<form action='delete_task.php' method='post'>";
+                    echo "<form action='php/delete_task.php' method='post'>";
                     echo "<input type='hidden' name='id' value='{$row['id']}'>";
                     echo "<button type='submit' class='btn btn-outline-danger btn-xl'>Supprimer</button>";
                     echo "</form>";
 
                     // Bouton "Terminé"
-                    echo "<form action='task_done.php' method='post'>";
+                    echo "<form action='php/task_done.php' method='post'>";
                     echo "<input type='hidden' name='id' value='{$row['id']}'>";
 
                     switch ($row['completed']) {
@@ -96,7 +96,7 @@ require_once 'php/header.php';
 
 
                     // Formulaire caché pour envoyer l'ID de la tâche à change_task.php anciennement modification_tache.php
-                    echo "<form action='change_task.php' method='post'>";
+                    echo "<form action='php/change_task.php' method='post'>";
                     echo "<input type='hidden' name='id' value='{$row['id']}'>";
                     echo "<button type='submit' class='btn btn-outline-primary'>Modifier</button>";
                     echo "</form>";
@@ -136,7 +136,7 @@ require_once 'php/header.php';
 
     </ul>
     <h4>Ajouter une tâche </h4>
-    <form action="add_task.php" method="post" id="task_form">
+    <form action="php/add_task.php" method="post" id="task_form">
         <input type="text" name="title" placeholder="Titre de la tâche" required>
         <div>
             <label for="priority">Priorité :</label>
