@@ -16,12 +16,13 @@ if (isset ($_SESSION['message_success'])) {
 
 if (!isset ($_SESSION['utilisateur_connecte'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-    header('Location: sign_in.php');
+    header('Location: php/sign_in.php');
     exit;
 }
 
 $pageTitle = "Page d'accueil Gestionnaire de tâches";
-require_once '/php/header.php'; ?>
+require_once 'php/header.php';
+?>
 
 <div class="container">
     <h2 class="title_center">Gestionnaire de tâches</h2>
@@ -29,7 +30,7 @@ require_once '/php/header.php'; ?>
     <ul>
         <?php
         // Afficher les tâches depuis la base de données
-        require '../php/connection_database.php';
+        require '/php/connection_database.php';
 
         try {
             if (isset ($_SESSION['utilisateur_connecte'])) {
