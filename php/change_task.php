@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-//(anciennement modification_tache.php)
+//(anciennement modification_tache.php), modifier une Tache dans Index.php
 
 // Vérifier si l'utilisateur est connecté
 if (!isset ($_SESSION['utilisateur_connecte'])) {
