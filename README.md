@@ -1,6 +1,4 @@
-# Task Manager
-
-## Description
+# Description
 
 This project is a simple task manager developed in PHP. It allows users to create, view, update, and delete tasks in a user-friendly web interface.
 
@@ -12,7 +10,7 @@ This project is a simple task manager developed in PHP. It allows users to creat
 - Delete a task.
 - Filter tasks by status (completed or not completed).
 
-## Project Structure
+### Project Structure
 
 The project is organized as follows:
 
