@@ -37,8 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION['message_success'] = "Inscription réussie ! Bienvenue sur la page d'accueil.";
 
                         // Redirection vers la page d'accueil après l'inscription
-                        header("Location:Index.php");
-
+                        header("Location:../Index.php");
                         exit;
 
 

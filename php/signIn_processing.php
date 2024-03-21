@@ -31,7 +31,7 @@ if (isset ($_POST['identifier'], $_POST['password'])) {
                 $update_stmt->execute();
                 var_dump($update_stmt);
                 // Rediriger l'utilisateur vers la page d'accueil
-                header("Location:Index.php");
+                header("Location:../Index.php");
                 exit;
             } else {
                 // Mot de passe incorrect

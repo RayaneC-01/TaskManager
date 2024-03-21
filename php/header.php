@@ -31,12 +31,12 @@ function getCurrentPageName()
                 aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="Index.php"><img src="/Images/logo_icon.png" alt="" class="img_nav"></a>
+            <a class="navbar-brand" href="../Index.php"><img src="/Images/logo_icon.png" alt="" class="img_nav"></a>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 h4">
                     <li class="nav-item">
                         <a class="nav-link active bouton-requiert-connexion" aria-current="page"
-                            href="Index.php">Accueil </a>
+                            href="../Index.php">Accueil </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/php/dashboard.php">Tableau de Bord</a>
