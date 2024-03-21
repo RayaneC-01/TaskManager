@@ -4,7 +4,6 @@ require_once 'connection_database.php';
 //Fichier pour supprimer une tache.
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['id'])) {
     $id = $_POST['id'];
-
     try {
         // Préparer la requête de suppression
         $stmt = $conn->prepare("DELETE FROM tasks WHERE id=:id");
