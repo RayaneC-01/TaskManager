@@ -8,7 +8,7 @@ if (!isset ($_SESSION['utilisateur_connecte'])) {
     exit;
 }
 
-require_once '../php/connection_database.php';
+require_once 'connection_database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
     // Récupérer l'identifiant unique de l'utilisateur connecté
