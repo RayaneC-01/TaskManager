@@ -12,7 +12,7 @@ if (isset ($_POST['identifier'], $_POST['password'])) {
         $stmt->bindParam(':identifier', $_POST['identifier']);
         $stmt->execute();
 
-        // Vérifier si l'utilisateur existe
+        // Vérifier si l'utilisateur existe 
         if ($stmt->rowCount() > 0) {
             // Récupérer les données de l'utilisateur
             $row = $stmt->fetch();
