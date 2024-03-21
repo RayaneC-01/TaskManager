@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['id']) && is_numeric(
         exit;
     }
 } else {
-    // Si l'ID de la tâche n'a pas été envoyé ou s'il est invalide, rediriger l'utilisateur avec un message d'erreur
+    // Si l'ID de la tâche n'a pas été envoyé ou s'il est invalide, rediriger l'utilisateur avec un message d'erreur 
     $_SESSION['error_message'] = 'ID de tâche invalide.';
 
     // Rediriger l'utilisateur vers une autre page
