@@ -36,7 +36,7 @@ function getCurrentPageName()
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 h4">
                     <li class="nav-item">
                         <a class="nav-link active bouton-requiert-connexion" aria-current="page"
-                            href="Index.php">Accueil</a>
+                            href="Index.php">Accueil </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/php/dashboard.php">Tableau de Bord</a>
