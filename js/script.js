@@ -106,4 +106,3 @@ document.addEventListener('click', function (event) {
         passwordInput.classList.remove('active');
     }
 });
-
