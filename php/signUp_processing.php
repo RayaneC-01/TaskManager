@@ -5,6 +5,7 @@ require_once 'connection_database.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $required_fields = ['first_name', 'last_name', 'email', 'password', 'confirm_password', 'username'];
 
+
     // Vérifier si tous les champs requis sont renseignés
     if (count(array_intersect($required_fields, array_keys($_POST))) === count($required_fields)) {
         $first_name = $_POST['first_name'];
