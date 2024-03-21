@@ -50,7 +50,7 @@ session_start();
                                 unset($_SESSION['message_error']); // Effacer le message après l'avoir affiché
                             }
                             ?>
-                            <form id="inscriptionForm" method="POST" action="../php/signUp_processing.php">
+                            <form id="inscriptionForm" method="POST" action="/php/signUp_processing.php">
                                 <div class="form-group">
                                     <label for="first_name">Prénom: </label>
                                     <input type="text" id="first_name" name="first_name" class="form-control"
@@ -94,7 +94,7 @@ session_start();
                                 <div class="button-group_inscription">
                                     <button type="submit" class="btn btn-primary btn-lg">Créer un
                                         compte</button>
-                                    <p>Vous avez deja un compte?<a href="sign_in.php"> Se connecter</a></p>
+                                    <p>Vous avez deja un compte?<a href="php/sign_in.php"> Se connecter</a></p>
                                     <!-- <button onclick="window.location.href ='./connexion.php' " type="button"
                                         class="btn btn-info btn-lg">Se
                                         connecter</button> -->

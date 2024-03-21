@@ -6,6 +6,6 @@ session_start();
 session_destroy();
 
 // Redirigez l'utilisateur vers la page de connexion
-header("Location: Index.php");
+header('Location: php/sign_in.php');
 exit;
 ?>

@@ -3,7 +3,7 @@
 session_start();
 
 // Inclure le fichier de connexion à la base de données
-require_once '../php/connection_database.php';
+require_once 'connection_database.php';
 
 // Vérifier si l'ID de la tâche a été envoyé via POST et s'il est valide
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['id']) && is_numeric($_POST['id'])) {

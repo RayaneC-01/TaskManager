@@ -39,7 +39,7 @@ function getCurrentPageName()
                             href="Index.php">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard.php">Tableau de Bord</a>
+                        <a class="nav-link" href="/php/dashboard.php">Tableau de Bord</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="deleted_task.php" aria-disabled="false">Historique</a>
@@ -53,7 +53,7 @@ function getCurrentPageName()
 
 
                 <button type="button" class="btn btn-outline-danger btn-lg" style="margin-right: 10px;"
-                    onclick="window.location.href='sign_in.php'">Déconnexion</button>
+                    onclick="window.location.href='/php/sign_in.php'">Déconnexion</button>
             </div>
         </div>
     </nav>

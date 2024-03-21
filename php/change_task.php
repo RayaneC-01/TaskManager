@@ -13,7 +13,7 @@ if (!isset ($_SESSION['utilisateur_connecte'])) {
 // Récupérer l'identifiant de l'utilisateur connecté
 $user_id = $_SESSION['utilisateur_connecte'];
 
-require_once '../php/connection_database.php';
+require_once 'connection_database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
     // Validation et nettoyage du titre de la tâche

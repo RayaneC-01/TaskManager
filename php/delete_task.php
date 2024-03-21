@@ -1,5 +1,6 @@
 <?php
-require_once '../php/connection_database.php';
+require_once 'connection_database.php';
+
 //Fichier pour supprimer une tache.
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['id'])) {
     $id = $_POST['id'];

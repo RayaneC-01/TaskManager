@@ -4,7 +4,7 @@ session_start();
 // Vérifier si les champs requis sont renseignés
 if (isset ($_POST['identifier'], $_POST['password'])) {
     // Connexion à la base de données
-    require_once '../php/connection_database.php';
+    require_once 'connection_database.php';
 
     try {
         // Préparer la requête SQL pour récupérer les informations de l'utilisateur
@@ -32,7 +32,7 @@ if (isset ($_POST['identifier'], $_POST['password'])) {
                 $update_stmt->execute();
                 var_dump($update_stmt);
                 // Rediriger l'utilisateur vers la page d'accueil
-                header("Location: ../Index.php");
+                header("Location:Index.php");
                 exit;
             } else {
                 // Mot de passe incorrect

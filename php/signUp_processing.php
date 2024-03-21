@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../php/connection_database.php';
+require_once 'connection_database.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $required_fields = ['first_name', 'last_name', 'email', 'password', 'confirm_password', 'username'];
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $_SESSION['message_success'] = "Inscription réussie ! Bienvenue sur la page d'accueil.";
 
                         // Redirection vers la page d'accueil après l'inscription
-                        header("Location: ../Index.php");
+                        header("Location:Index.php");
 
                         exit;
 
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Redirection vers la page d'inscription après le traitement
-    header("Location: ../php/sign_up.php");
+    header("Location: sign_up.php");
     exit;
 }
 ?>

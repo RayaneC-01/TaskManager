@@ -50,7 +50,7 @@
                                     </ol>
                                 </div>
                             </div>
-                            <form id="login_Form" method="POST" action="../php/signIn_processing.php">
+                            <form id="login_Form" method="POST" action="/php/signIn_processing.php">
                                 <!-- Assurez-vous que le formulaire pointe vers la bonne page PHP -->
                                 <div class="form-group">
                                     <label for="identifier">nom d'utilisateur ou e-mail </label>
@@ -64,8 +64,9 @@
                                 </div>
                                 <div class="checkbox form-group">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="remember">
-                                        <label class="form-check-label remember-label" for="remember">Se
+                                        <input class="form-check-input" type="checkbox" name="rememberMe"
+                                            id="rememberMe">
+                                        <label class="form-check-label rememberMe-label" for="rememberMe">Se
                                             Rappeler de moi</label>
                                     </div>
                                     <!-- <div class="link forget-pass"><a href="forgot_password.php">Mot de passe
@@ -73,7 +74,7 @@
                                 </div>
                                 <div class="button-group">
                                     <button type="submit" class="btn btn-primary btn-lg">Connexion</button>
-                                    <p>Vous n'avez pas de compte?<a href="sign_up.php" class="button-text">
+                                    <p>Vous n'avez pas de compte?<a href="php/sign_up.php" class="button-text">
                                             Créer
                                             un compte</a> </p>
                                 </div>
