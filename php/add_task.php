@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
     // Vérifier si le titre est vide après le nettoyage
     if (empty ($titre)) {
         $_SESSION['message_error'] = "Erreur : Le titre de la tâche est requis.";
-        header('Location: Index.php');
+        header("Location:../Index.php");
         exit;
     }
 
@@ -52,14 +52,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
             // Vérifier si aucune date n'a été sélectionnée
             if (empty ($custom_due_date)) {
                 $_SESSION['message_error'] = "Erreur : Une date d'échéance personnalisée est requise.";
-                header('Location: Index.php');
+                header("Location:../Index.php");
                 exit;
             }
 
             // Valider la date personnalisée et la formater en format YYYY-MM-DD
             if (strtotime($custom_due_date) === false) {
                 $_SESSION['message_error'] = "Erreur : Format de date personnalisée invalide.";
-                header('Location: Index.php');
+                header("Location:../Index.php");
                 exit;
             }
 
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
             break;
         default:
             $_SESSION['message_error'] = "Erreur : Option de date d'échéance non reconnue.";
-            header('Location: Index.php');
+            header("Location:../Index.php");
             exit;
     }
 
@@ -86,19 +86,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
         var_dump($stmt);
         // Rediriger vers la page d'accueil avec un message de succès
         $_SESSION['message_success'] = "La tâche a été ajoutée avec succès.";
-        header("Location: Index.php");
+        header("Location:../Index.php");
         exit;
     } catch (PDOException $e) {
         // En cas d'erreur lors de l'insertion dans la base de données
         $_SESSION['message_error'] = "Erreur lors de l'ajout de la tâche : " . $e->getMessage();
-        header("Location: Index.php");
+        header("Location:../Index.php");
         exit;
     }
 
 } else {
     // Si tous les champs requis ne sont pas soumis, rediriger avec un message d'erreur
     $_SESSION['message_error'] = "Veuillez remplir tous les champs.";
-    header("Location: Index.php");
+    header("Location:../Index.php");
     exit;
 }
 ?>
