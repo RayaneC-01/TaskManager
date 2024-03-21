@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $confirm_password = $_POST['confirm_password'];
         $username = $_POST['username'];
 
-        // Vérifier si le mot de passe correspond à la confirmation du mot de passe
+        // Vérifier si le mot de passe correspond à la confirmation du mot de passe 
         if ($password === $confirm_password) {
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 // Vérifier si le pseudo est déjà utilisé
