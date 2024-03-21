@@ -5,7 +5,6 @@ session_start();
 if (isset ($_POST['identifier'], $_POST['password'])) {
     // Connexion à la base de données
     require_once 'connection_database.php';
-
     try {
         // Préparer la requête SQL pour récupérer les informations de l'utilisateur
         $stmt = $conn->prepare("SELECT * FROM users WHERE username = :identifier OR email = :identifier");
