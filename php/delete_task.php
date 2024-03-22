@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['id'])) {
         $stmt->execute();
 
         // Rediriger vers la page d'accueil si la tache est correctement supprimée
-        header("Location: Index.php");
+        header("Location: ../Index.php");
         exit;
     } catch (PDOException $e) {
         // En cas d'erreur, afficher un message d'erreur
