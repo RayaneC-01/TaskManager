@@ -43,17 +43,15 @@ require_once 'php/header.php';
                 $stmt->bindParam(':username', $username);
                 $stmt->execute();
 
-                var_dump($stmt);
                 // Récupérez l'identifiant de l'utilisateur
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $user_id = $row['id'];
-                var_dump($user_id);
 
                 // Préparez et exécutez une requête SQL pour sélectionner les tâches de l'utilisateur
                 $stmt_tasks = $conn->prepare("SELECT * FROM tasks WHERE user_id = :user_id");
                 $stmt_tasks->bindParam(':user_id', $user_id);
                 $stmt_tasks->execute();
-                var_dump($username);
+
                 // Parcourir les résultats et afficher chaque tâche
                 while ($row = $stmt_tasks->fetch()) {
                     echo "<li class='task-item added-task d-flex justify-content-between align-items-center'>";
@@ -94,10 +92,10 @@ require_once 'php/header.php';
 
                     echo "</form>";
 
-
                     // Formulaire caché pour envoyer l'ID de la tâche à change_task.php anciennement modification_tache.php
                     echo "<form action='php/change_task.php' method='post'>";
                     echo "<input type='hidden' name='id' value='{$row['id']}'>";
+                    echo "<input type='hidden' name='title' value='{$row['title']}'>";
                     echo "<button type='submit' class='btn btn-outline-primary'>Modifier</button>";
                     echo "</form>";
 
@@ -147,8 +145,10 @@ require_once 'php/header.php';
             </select>
             <span>Note : 1 est le plus faible et 3 est le plus élevé.</span>
         </div>
+        <br>
         <div class="date-wrapper">
-            <select name="due_date" id="due_date_select">
+            <label for="priority">Choisir une Date :</label>
+            <select name="due_date" id="due_date_select" class="priority-select">
                 <option value="today">Aujourd'hui</option>
                 <option value="tomorrow">Demain</option>
                 <option value="next_week">La semaine prochaine</option>
