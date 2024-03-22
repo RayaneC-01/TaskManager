@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['id']) && is_numeric(
             $_SESSION['success_message'] = 'L\'état de la tâche a été mis à jour avec succès.';
 
             // Rediriger l'utilisateur vers la page d'accueil
-            header("Location: Index.php");
+            header("Location: ../Index.php");
             exit;
         } else {
             // La tâche avec cet ID n'existe pas, stocker un message d'erreur dans la session
