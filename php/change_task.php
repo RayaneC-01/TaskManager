@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-//(anciennement modification_tache.php), modifier une Tache dans Index.php
-
 // Vérifier si l'utilisateur est connecté
 if (!isset ($_SESSION['utilisateur_connecte'])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
@@ -15,89 +13,73 @@ $user_id = $_SESSION['utilisateur_connecte'];
 
 require_once 'connection_database.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['title'])) {
-    // Validation et nettoyage du titre de la tâche
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset ($_POST['id'], $_POST['title'], $_POST['priority'])) {
+    // Validation et nettoyage des données
+    $id = $_POST['id'];
     $titre = htmlspecialchars(trim($_POST['title']));
+    $priority = intval($_POST['priority']);
 
-    // Vérifier si le titre est vide après le nettoyage
-    if (empty ($titre)) {
-        $_SESSION['message_error'] = "Erreur : Le titre de la tâche est requis.";
-        header("Location: Index.php");
-
+    // Valider la priorité
+    if ($priority < 1 || $priority > 5) {
+        $_SESSION['message_error'] = "Erreur : La priorité doit être un entier entre 1 et 5.";
+        header("Location: ../Index.php");
         exit;
     }
 
-    $due_date = null;
-    $priority = $_POST['priority']; // Récupération de la priorité depuis le formulaire
-
-    // priorité est un entier
-    $priority = intval($priority);
-
-    // Vérifier si l'utilisateur a choisi une date personnalisée
-    if ($_POST['due_date'] === 'choose_date') {
-        // Récupérer la date personnalisée à partir du champ de formulaire
-        $due_date = $_POST['custom_due_date'];
-
-        // Vérifier si aucune date n'a été sélectionnée
-        if (empty ($due_date)) {
-            // Afficher un message d'erreur et rediriger vers la page d'accueil
-            $_SESSION['message_error'] = "Erreur : Une date d'échéance est requise.";
-            header("Location: Index.php");
-
-            exit;
-        }
-    } else {
-        // Traitement de la date en fonction de l'option choisie
-        switch ($_POST['due_date']) {
-            case 'today':
-                $due_date = date('Y-m-d');
-                break;
-            case 'tomorrow':
-                $due_date = date('Y-m-d', strtotime('+1 day'));
-                break;
-            case 'next_week':
-                $due_date = date('Y-m-d', strtotime('+1 week'));
-                break;
-            case 'in_2_week':
-                $due_date = date('Y-m-d', strtotime('+2 week'));
-                break;
-            default:
-                // Gérer les cas d'erreur ou par défaut
-                $_SESSION['message_error'] = "Veuillez choisir une date ! ";
-                header("Location: Index.php");
+    // Traitement de la date en fonction de l'option choisie
+    switch ($_POST['due_date']) {
+        case 'today':
+            $due_date = date('Y-m-d');
+            break;
+        case 'tomorrow':
+            $due_date = date('Y-m-d', strtotime('+1 day'));
+            break;
+        case 'next_week':
+            $due_date = date('Y-m-d', strtotime('+1 week'));
+            break;
+        case 'in_2_week':
+            $due_date = date('Y-m-d', strtotime('+2 week'));
+            break;
+        case 'choose_date':
+            // Vérifier si la date personnalisée est fournie et dans un format valide
+            if (isset ($_POST['custom_due_date']) && strtotime($_POST['custom_due_date']) !== false) {
+                $due_date = $_POST['custom_due_date'];
+            } else {
+                $_SESSION['message_error'] = "Erreur : Une date d'échéance valide est requise.";
+                header("Location: ../Index.php");
                 exit;
-        }
-    }
-
-    // Rediriger vers la page d'accueil en cas d'erreur
-    if (!isset ($due_date)) {
-        header("Location: Index.php");
-        exit;
+            }
+            break;
+        default:
+            $_SESSION['message_error'] = "Erreur : Veuillez choisir une date.";
+            header("Location: ../Index.php");
+            exit;
     }
 
     try {
-        // Insérer la tâche dans la base de données avec la priorité spécifiée
-        $stmt = $conn->prepare("INSERT INTO tasks (user_id, title, due_date, priority) VALUES (:user_id, :title, :due_date, :priority)");
+        // Mettre à jour la tâche dans la base de données avec la priorité spécifiée
+        $stmt = $conn->prepare("UPDATE tasks SET title = :title, due_date = :due_date, priority = :priority WHERE id = :id AND user_id = :user_id");
+        $stmt->bindParam(':id', $id);
         $stmt->bindParam(':user_id', $user_id);
-        $stmt->bindParam(':title', $titre); // Correction de la variable ici
+        $stmt->bindParam(':title', $titre);
         $stmt->bindParam(':due_date', $due_date);
         $stmt->bindParam(':priority', $priority);
         $stmt->execute();
 
-        // Rediriger vers la page d'accueil avec un message de succès
-        $_SESSION['message_success'] = "La tâche a été ajoutée avec succès.";
-        header("Location: Index.php");
-        exit;
+        // Redirection vers la page d'accueil avec un message de succès
+        $_SESSION['message_success'] = "La tâche a été modifiée avec succès.";
+        header("Location: ../Index.php");
+        exit; // Assurez-vous d'ajouter exit après la redirection pour arrêter l'exécution du script
     } catch (PDOException $e) {
-        // En cas d'erreur lors de l'insertion dans la base de données
-        $_SESSION['message_error'] = "Erreur lors de l'ajout de la tâche : " . $e->getMessage();
-        header("Location: Index.php");
+        // En cas d'erreur lors de la mise à jour dans la base de données
+        $_SESSION['message_error'] = "Erreur lors de la modification de la tâche : " . $e->getMessage();
+        header("Location: ../Index.php");
         exit;
     }
 } else {
     // Si tous les champs requis ne sont pas soumis, redirigez avec un message d'erreur
-    $_SESSION['message_error'] = "Veuillez remplir tous les champs.";
-    header("Location: Index.php");
+    $_SESSION['message_error'] = "Erreur : Veuillez fournir les données nécessaires pour modifier la tâche.";
+    header("Location: ../Index.php");
     exit;
 }
 ?>
