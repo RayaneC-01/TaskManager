@@ -45,15 +45,16 @@ function getCurrentPageName()
                         <a class="nav-link disabled" href="deleted_task.php" aria-disabled="false">Historique</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search" style="margin-right: 70px;" action="search.php" method="post">
+                <!-- <form class="d-flex" role="search" style="margin-right: 70px;" action="search.php" method="post">
                     <input class="form-control me-3" type="search" name="query" placeholder="Search"
                         aria-label="Search" />
                     <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                </form> -->
 
 
                 <button type="button" class="btn btn-outline-danger btn-lg" style="margin-right: 10px;"
                     onclick="window.location.href='/php/sign_in.php'">Déconnexion</button>
+
             </div>
         </div>
     </nav>
