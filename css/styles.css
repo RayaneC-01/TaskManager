@@ -13,7 +13,7 @@ body {
 
 .container {
   display: flex;
-  width: 900px;
+  /* width: 900px; */
   margin: 50px auto;
   padding: 20px;
   border-radius: 5px;
@@ -162,7 +162,7 @@ span {
 }
 
 .low-priority {
-  color: greenyellow; /* Couleur pour la priorité faible */
+  color: green; /* Couleur pour la priorité faible */
 }
 
 .medium-priority {
@@ -210,7 +210,7 @@ span {
   }
 
   .task-item {
-    flex-direction: column; /* Empilez les éléments sur les petits écrans */
+    flex-direction: row; /* Empilez les éléments sur les petits écrans */
     text-align: center; /* Centrez le contenu */
   }
 
