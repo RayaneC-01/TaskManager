@@ -52,10 +52,19 @@ require_once 'php/header.php';
                 $stmt_tasks->bindParam(':user_id', $user_id);
                 $stmt_tasks->execute();
 
+
+
                 // Parcourir les résultats et afficher chaque tâche
                 while ($row = $stmt_tasks->fetch()) {
                     echo "<li class='task-item added-task d-flex justify-content-between align-items-center'>";
-                    echo "<span class='h4'>{$row['title']}</span>";
+                    //echo "<span class='h4'>{$row['title']}</span>";
+        
+                    // Affichage du titre
+                    if ($row['completed'] == 1) {
+                        echo "<span class='h4 completed-task'>{$row['title']} (Terminé)</span>";
+                    } else {
+                        echo "<span class='h4'>{$row['title']}</span>";
+                    }
 
                     // Vérifier si la tâche est marquée comme terminée ou non
                     if ($row['completed'] == 1) {
@@ -93,11 +102,15 @@ require_once 'php/header.php';
                     echo "</form>";
 
                     // Formulaire caché pour envoyer l'ID de la tâche à change_task.php anciennement modification_tache.php
+                    // Formulaire pour modifier la tâche
                     echo "<form action='php/change_task.php' method='post'>";
                     echo "<input type='hidden' name='id' value='{$row['id']}'>";
                     echo "<input type='hidden' name='title' value='{$row['title']}'>";
+                    echo "<input type='hidden' name='priority' value='{$row['priority']}'>";
+                    echo "<input type='hidden' name='due_date' value='{$row['due_date']}'>";
                     echo "<button type='submit' class='btn btn-outline-primary'>Modifier</button>";
                     echo "</form>";
+
 
                     // Balise aside pour afficher la priorité
                     echo "<aside class='priority-container'>";
@@ -149,14 +162,15 @@ require_once 'php/header.php';
         <div class="date-wrapper">
             <label for="priority">Choisir une Date :</label>
             <select name="due_date" id="due_date_select" class="priority-select">
+                <option value="">-- Choisir une date --</option>
                 <option value="today">Aujourd'hui</option>
                 <option value="tomorrow">Demain</option>
                 <option value="next_week">La semaine prochaine</option>
                 <option value="in_2_week">Dans 2 semaines</option>
                 <option value="choose_date">Choisir une date</option>
             </select>
-            <input type="text" id="custom_due_date" name="custom_due_date" placeholder="D-M-Y" style="display: none;">
         </div>
+        <input type="text" id="custom_due_date" name="custom_due_date" placeholder="D-M-Y" style="display: none;">
         <button class="bouton-requiert-connexion" type="submit">Ajouter</button>
     </form>
 </div>
