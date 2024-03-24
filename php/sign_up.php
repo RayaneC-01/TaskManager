@@ -29,7 +29,8 @@ session_start();
                             <div class="logo">
                                 <img src="/Images/user.png" alt="User logo">
                             </div>
-                            <div class="form-group nm_lk">
+                            <!-- 
+                                <div class="form-group nm_lk">
                                 <p class="h4">Connectez-vous avec :</p>
                             </div>
                             <div class="form-group pt-0">
@@ -42,7 +43,7 @@ session_start();
                                         <li><i class="fab fa-linkedin"></i></li>
                                     </ol>
                                 </div>
-                            </div>
+                            </div> -->
                             <?php
                             // Afficher les erreurs s'il y en a
                             if (isset ($_SESSION['message_error'])) {
