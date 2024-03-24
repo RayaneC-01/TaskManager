@@ -41,9 +41,9 @@ function getCurrentPageName()
                     <li class="nav-item">
                         <a class="nav-link" href="/php/dashboard.php">Tableau de Bord</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link disabled" href="deleted_task.php" aria-disabled="false">Historique</a>
-                    </li>
+                    </li> -->
                 </ul>
                 <!-- <form class="d-flex" role="search" style="margin-right: 70px;" action="search.php" method="post">
                     <input class="form-control me-3" type="search" name="query" placeholder="Search"
