@@ -193,6 +193,10 @@ span {
   font-size: 16px;
 }
 
+.btn_change-task {
+  display: flex;
+  justify-content: space-evenly;
+}
 /* Ajoutez ces règles à la fin de votre fichier CSS */
 
 @media screen and (max-width: 768px) {
