@@ -77,7 +77,22 @@ require_once 'header.php'; ?>
                         </li>
                         <li class="list-group-item h4">Email: <strong>
                                 <?php echo $email; ?>
-                            </strong></li>
+                                <div class="button-group">
+                                    <!-- Lien pour rediriger l'utilisateur vers la page de changement d'e-mail -->
+                                    <a href="change_email.php" class="button-text">Changer l'adresse e-mail</a>
+
+                                </div>
+                            </strong>
+                        </li>
+                        <li class="list-group-item h4">
+                            <div class="button-group">
+                                <!-- Lien pour rediriger l'utilisateur vers la page de changement d'e-mail -->
+                                Mot de passe : <strong>
+                                </strong> <a href="change_password.php" class="button-text">Changer le mot de passe </a>
+
+                            </div>
+                        </li>
+
                         <li class="list-group-item h4">Date de création du compte: <strong>
                                 <?php echo $created_at; ?>
                             </strong></li>
@@ -96,14 +111,14 @@ require_once 'header.php'; ?>
             <h4>Vos Tâches:</h4>
             <ul class="list-group">
                 <?php while ($task = $stmt_tasks->fetch(PDO::FETCH_ASSOC)): ?>
-                <li class="list-group-item">
-                    <strong>
-                        <?php echo $task['title']; ?>
-                    </strong>
-                    <span class="badge bg-primary">
-                        <?php echo "Priorité : " . $task['priority']; ?>
-                    </span>
-                </li>
+                    <li class="list-group-item">
+                        <strong>
+                            <?php echo $task['title']; ?>
+                        </strong>
+                        <span class="badge bg-primary">
+                            <?php echo "Priorité : " . $task['priority']; ?>
+                        </span>
+                    </li>
                 <?php endwhile; ?>
 
             </ul>
