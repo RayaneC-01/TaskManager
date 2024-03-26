@@ -42,11 +42,18 @@
                             <div class="form-group pt-0">
                                 <div class="_social_04">
                                     <ol>
-                                        <li><i class="fab fa-github"></i></li>
-                                        <li><i class="fab fa-twitter"></i></li>
-                                        <li><i class="fab fa-google-plus-g"></i></li>
-                                        <li><i class="fab fa-instagram"></i></li>
-                                        <li><i class="fab fa-linkedin"></i></li>
+                                        <li><a href="https://github.com/" target=”_blank”>
+                                                <i class="fab fa-github"></i></a></li>
+                                        <li><a href="https://twitter.com/" target=”_blank”>
+                                                <i class=" fab fa-twitter"></i></li>
+                                        <li><a href="https://plus.google.com/" target=”_blank”><i
+                                                    class="fab fa-google-plus-g"></i></a>
+                                        </li>
+                                        <li><a href="https://instagram.com/" target=”_blank”>
+                                                <i class="fab fa-instagram"></i></a></li>
+                                        <li><a href="https://linkedin.com/" target=”_blank”><i
+                                                    class="fab fa-linkedin"></i></a>
+                                        </li>
                                     </ol>
                                 </div>
                             </div>

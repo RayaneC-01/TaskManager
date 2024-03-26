@@ -76,14 +76,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
 }
 
+?>
+<?php
 require_once 'header.php';
 ?>
 
 <body>
 
-    <h1>Modifier le titre de la tâche</h1>
     <div class="container">
         <div class="centered-card">
+            <h1 lass="blockquote">Modifier le titre de la tâche</h1>
             <div class="card">
                 <div class="card-body">
                     <?php if (!empty ($message)): ?>
@@ -101,17 +103,20 @@ require_once 'header.php';
                     <form action="change_task.php" method="post" class="task-form">
                         <input type="hidden" name="id" value="<?php echo $task_id; ?>">
                         <div class="form-group">
-                            <label for="title" class="form-label">Nouveau titre :</label>
+                            <label class="text-info" for="title" class="form-label">Nouveau titre :</label>
                             <input type="text" id="title" name="title" class="form-control"
                                 value="<?php echo $task_title; ?>">
                         </div>
                         <div class="form-group">
-                            <label for="priority" class="form-label">Nouvelle priorité :</label>
+                            <label class="text-info" for="priority" cla s s="form-label">Nouvelle priorité
+                                :</label>
                             <input type="text" id="priority" name="priority" class="form-control"
                                 value="<?php echo $task_priority; ?>">
                         </div>
                         <div class="form-group">
-                            <label for="due_date" class="form-label">Nouvelle date d'échéance :</label>
+
+                            <label class="text-info" or="due_date" class="form-label">Nouvelle date d'échéance
+                                :</label>
                             <input type="text" id="due_date" name="due_date" class="form-control"
                                 value="<?php echo $task_due_date; ?>">
                         </div>

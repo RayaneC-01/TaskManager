@@ -12,10 +12,9 @@ if (isset ($_SESSION['utilisateur_connecte'])) {
     $message = $username;
 
     // Préparez et exécutez une requête SQL pour sélectionner le prénom de l'utilisateur
-    $stmt = $conn->prepare("SELECT id, first_name, last_name, email, created_at, last_connexion FROM users WHERE username = :username");
+    $stmt = $conn->prepare("SELECT id, first_name, last_name, email, created_at, username, last_connexion FROM users WHERE username = :username");
     $stmt->bindParam(':username', $username);
     $stmt->execute();
-
 
     // Récupérez le résultat de la requête
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -25,6 +24,7 @@ if (isset ($_SESSION['utilisateur_connecte'])) {
         // Récupérez le prénom de l'utilisateur
         $first_name = $row['first_name'];
         $last_name = $row['last_name'];
+        $user_username = $row['username'];
         $email = $row['email'];
         $created_at = $row['created_at'];
         $last_connexion = $row['last_connexion'];
@@ -75,6 +75,10 @@ require_once 'header.php'; ?>
                                 <?php echo $first_name; ?>
                             </strong>
                         </li>
+                        <li class="list-group-item h4">Nom d'utilisateur: <strong>
+                                <?php echo $user_username; ?>
+                            </strong>
+                        </li>
                         <li class="list-group-item h4">Email: <strong>
                                 <?php echo $email; ?>
                                 <div class="button-group">
@@ -87,8 +91,8 @@ require_once 'header.php'; ?>
                         <li class="list-group-item h4">
                             <div class="button-group">
                                 <!-- Lien pour rediriger l'utilisateur vers la page de changement d'e-mail -->
-                                Mot de passe : <strong>
-                                </strong> <a href="change_password.php" class="button-text">Changer le mot de passe </a>
+                                Mot de passe :<a href="change_password.php" class="button-text">Changer le mot de
+                                    passe </a>
 
                             </div>
                         </li>
@@ -111,7 +115,18 @@ require_once 'header.php'; ?>
             <h4>Vos Tâches:</h4>
             <ul class="list-group">
                 <?php while ($task = $stmt_tasks->fetch(PDO::FETCH_ASSOC)): ?>
-                    <li class="list-group-item">
+                    <?php
+                    $priority_class = '';
+                    if ($task['priority'] == 'Faible') {
+                        $priority_class = 'bg-info';
+                    } elseif ($task['priority'] == 'Moyenne') {
+
+                        $priority_class = 'bg-warning';
+                    } elseif ($task['priority'] == 'Haute') {
+                        $priority_class = 'bg-danger';
+                    }
+                    ?>
+                    <li class="list-group-item <?php echo $priority_class; ?>">
                         <strong>
                             <?php echo $task['title']; ?>
                         </strong>

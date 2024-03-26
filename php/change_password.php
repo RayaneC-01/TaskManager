@@ -78,13 +78,13 @@ require_once 'header.php';
                 <div class="card-body">
                     <form action="change_password.php" method="post">
                         <?php if (isset ($message)): ?>
-                        <div class="alert alert-success" role="alert">
-                            <?php echo $message; ?>
-                        </div>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo $message; ?>
+                            </div>
                         <?php elseif (isset ($error_message)): ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?php echo $error_message; ?>
-                        </div>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo $error_message; ?>
+                            </div>
                         <?php endif; ?>
 
                         <div class="form-group">

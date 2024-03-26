@@ -174,6 +174,13 @@ require_once 'php/header.php';
         <button class="bouton-requiert-connexion" type="submit">Ajouter</button>
     </form>
 </div>
+<footer class="py-3 ">
+    <ul class="nav justify-content-center border-bottom ">
+        <li class=" nav-item"><a href="Index.php" class="nav-link px-2 text-body-secondary">Home</a></li>
+        <li class="nav-item"><a href="about.php" class="nav-link px-2 text-body-secondary">About</a></li>
+    </ul>
+    <p class="text-center text-body-secondary">© 2024 All rights reserved, Rayane Chaabane</p>
+</footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
