@@ -21,13 +21,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset ($_POST['new_password'])) {
 
     // Vérifier si l'entrée de connexion est un e-mail
     if (filter_var($login_identifier, FILTER_VALIDATE_EMAIL)) {
-        // L'entrée de connexion est un e-mail
-        $stmt = $conn->prepare("SELECT id FROM users WHERE email = :login_identifier");
-    } else {
-        // L'entrée de connexion est un nom d'utilisateur
-        $stmt = $conn->prepare("SELECT id FROM users WHERE username = :login_identifier");
-    }
+        // L'entrée de connexion est un e-mail ou mdp
+        $stmt = $conn->prepare("SELECT id FROM users WHERE username = :login_identifier OR email = :login_identifier");
 
+    }
     // Lier le paramètre
     $stmt->bindParam(':login_identifier', $login_identifier);
     $stmt->execute();
@@ -78,13 +75,13 @@ require_once 'header.php';
                 <div class="card-body">
                     <form action="change_password.php" method="post">
                         <?php if (isset ($message)): ?>
-                            <div class="alert alert-success" role="alert">
-                                <?php echo $message; ?>
-                            </div>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo $message; ?>
+                        </div>
                         <?php elseif (isset ($error_message)): ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?php echo $error_message; ?>
-                            </div>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $error_message; ?>
+                        </div>
                         <?php endif; ?>
 
                         <div class="form-group">
