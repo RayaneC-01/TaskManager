@@ -30,17 +30,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $created_at = date('Y-m-d H:i:s');
 
                     try {
-                        $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, created_at, username) VALUES (:first_name, :last_name, :email, :password, :created_at, :username)");
-                        $stmt->execute([':first_name' => $first_name, ':last_name' => $last_name, ':email' => $email, ':password' => $hashed_password, ':created_at' => $created_at, ':username' => $username]);
+                        // Préparation de la requête SQL pour insérer les données de l'utilisateur dans la base de données
+                        $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, created_at, username) 
+                                            VALUES (:first_name, :last_name, :email, :password, :created_at, :username)");
 
-                        // Après l'insertion réussie des données dans la base de données
+                        // Exécution de la requête SQL avec les valeurs des paramètres
+                        $stmt->execute([
+                            ':first_name' => $first_name,
+                            ':last_name' => $last_name,
+                            ':email' => $email,
+                            ':password' => $hashed_password,
+                            ':created_at' => $created_at,
+                            ':username' => $username
+                        ]);
+
+                        // Après une insertion réussie, un message de succès est stocké dans la session
                         $_SESSION['message_success'] = "Inscription réussie ! Bienvenue sur la page d'accueil.";
 
                         // Redirection vers la page d'accueil après l'inscription
                         header("Location:../Index.php");
+
+                        // Arrêt de l'exécution du script après la redirection
                         exit;
-
-
                     } catch (PDOException $e) {
                         // En cas d'erreur lors de l'insertion dans la base de données
                         $_SESSION['message_error'] = "Erreur lors de l'inscription : " . $e->getMessage();
