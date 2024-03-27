@@ -1,10 +1,10 @@
 <?php
 // Vérifier si l'utilisateur est connecté avant d'afficher cette page
 session_start();
-
 // Vérifier s'il y a un message d'erreur
 if (isset ($_SESSION['message_error'])) {
     echo "<div class='alert alert-danger'>{$_SESSION['message_error']}</div>";
+    header("refresh:6;url=Index.php");
     unset($_SESSION['message_error']); // Supprimer le message d'erreur après l'avoir affiché
 }
 
@@ -25,6 +25,7 @@ require_once 'php/header.php';
 ?>
 
 <div class="container">
+
     <h2 class="title_center">Gestionnaire de tâches</h2>
     <h2>Liste des tâches : </h2>
     <ul>
@@ -143,12 +144,13 @@ require_once 'php/header.php';
             // En cas d'erreur, afficher un message d'erreur
             echo "Erreur : " . $e->getMessage();
         }
+
         ?>
 
     </ul>
     <h4>Ajouter une tâche </h4>
     <form action="php/add_task.php" method="post" id="task_form">
-        <input type="text" name="title" placeholder="Titre de la tâche" required>
+        <input type="text" name="title" placeholder="Titre de la tâche">
         <div>
             <label for="priority">Priorité :</label>
             <select name="priority" id="priority" class="priority-select">
@@ -176,8 +178,8 @@ require_once 'php/header.php';
 </div>
 <footer class="py-3 ">
     <ul class="nav justify-content-center border-bottom ">
-        <li class=" nav-item"><a href="Index.php" class="nav-link px-2 text-body-secondary">Home</a></li>
-        <li class="nav-item"><a href="about.php" class="nav-link px-2 text-body-secondary">About</a></li>
+        <li class=" nav-item"><a href="Index.php" class="nav-link px-2 text-body-secondary">Accueil</a></li>
+        <li class="nav-item"><a href="about.php" class="nav-link px-2 text-body-secondary">A propos</a></li>
     </ul>
     <p class="text-center text-body-secondary">© 2024 All rights reserved, Rayane Chaabane</p>
 </footer>
