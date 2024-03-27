@@ -11,7 +11,7 @@ if (isset ($_POST['identifier'], $_POST['password'])) {
         $stmt->bindParam(':identifier', $_POST['identifier']);
         $stmt->execute();
 
-        // Vérifier si l'utilisateur existe 
+        // Vérifier si l'utilisateur existe
         if ($stmt->rowCount() > 0) {
             // Récupérer les données de l'utilisateur
             $row = $stmt->fetch();
@@ -19,34 +19,26 @@ if (isset ($_POST['identifier'], $_POST['password'])) {
 
             // Vérifier si le mot de passe est correct
             if (password_verify($_POST['password'], $hashed_password)) {
-
                 $_SESSION['utilisateur_connecte'] = $row['username']; // Identifiant de l'utilisateur
 
-                // Récupérer la date de création du compte depuis la base de données
-                $last_connexion = $row['last_connexion'];
-
-                // Mettre à jour la colonne last_connexion avec la date et l'heure actuelles
+                // Mettre à jour la date de dernière connexion
                 $update_stmt = $conn->prepare("UPDATE users SET last_connexion = NOW() WHERE username = :identifier");
                 $update_stmt->bindParam(':identifier', $row['username']);
                 $update_stmt->execute();
-                var_dump($update_stmt);
+
                 // Rediriger l'utilisateur vers la page d'accueil
                 header("Location:../Index.php");
                 exit;
             } else {
                 // Mot de passe incorrect
-                $_SESSION['error'] = "Mot de passe incorrect ! ";
+                $_SESSION['error'] = "Mot de passe incorrect pour l'utilisateur : " . htmlentities($_POST['identifier']);
             }
-
         } else {
             // Utilisateur non trouvé
-            $_SESSION['error'] = "Nom d'utilisateur ou adresse e-mail invalide.";
+            $_SESSION['error'] = "Nom d'utilisateur ou adresse e-mail invalide : " . htmlentities($_POST['identifier']);
         }
-        $conn = null;
     } catch (PDOException $e) {
         // Erreur de base de données
-        $_SESSION['error'] = "Une erreur s'est produite lors de la connexion. Veuillez réessayer ! ";
-        // Afficher le message d'erreur spécifique renvoyé par PDO pour le débogage
         $_SESSION['error'] = "Erreur de base de données : " . $e->getMessage();
     }
 } else {
@@ -57,5 +49,4 @@ if (isset ($_POST['identifier'], $_POST['password'])) {
 // Rediriger vers la page de connexion en cas d'erreur
 header("Location: sign_in.php");
 exit;
-
 ?>
