@@ -1,4 +1,5 @@
 <?php
+/*
 session_start();
 
 // Vérifie si l'utilisateur est connecté et récupérez son nom
@@ -50,4 +51,4 @@ unset($_SESSION['username']); // supprimer toute information sensible de la sess
     </div>
 </body>
 
-</html>
+</html>*/
