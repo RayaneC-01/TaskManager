@@ -1,4 +1,5 @@
 <?php
+/*
 session_start();
 
 // Vérifie si le formulaire de réinitialisation a été soumis
@@ -73,10 +74,10 @@ if (isset ($_POST['token'], $_POST['password'], $_POST['confirm_password'])) {
                         <div class="form-03-main">
                             <h1 class="h3">Réinitialiser le mot de passe</h1>
                             <?php if (isset ($_SESSION['error'])): ?>
-                                <div>
-                                    <?php echo $_SESSION['error']; ?>
-                                </div>
-                                <?php unset($_SESSION['error']); ?>
+                            <div>
+                                <?php echo $_SESSION['error']; ?>
+                            </div>
+                            <?php unset($_SESSION['error']); ?>
                             <?php endif; ?>
                             <form action="" method="post">
                                 <div class="form-group">
@@ -105,3 +106,4 @@ if (isset ($_POST['token'], $_POST['password'], $_POST['confirm_password'])) {
 </body>
 
 </html>
+*/

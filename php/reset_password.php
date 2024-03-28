@@ -1,4 +1,5 @@
 <?php
+/*
 session_start();
 
 // Vérifie si le formulaire de réinitialisation a été soumis
@@ -91,4 +92,4 @@ if (isset ($_POST['token'], $_POST['password'], $_POST['confirm_password'])) {
     </section>
 </body>
 
-</html>
+</html>*/
